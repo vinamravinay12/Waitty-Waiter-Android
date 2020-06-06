@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.waitty.waiter.activity.SearchActivity"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Cordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorCardProfile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarActionbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:elevation="@dimen/_5sdp"
+                android:background="@color/colorWhite"
+                app:titleTextAppearance="@style/Toolbar_home">
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorNextWelcome"
+                    android:textSize="@dimen/_14ssp"
+                    android:hint="@string/txt_search"
+                    android:fontFamily="@font/p_regular"
+                    android:digits="@string/digit_alpha_number_hash"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:background="@color/colorTransparent"
+                    android:imeOptions="actionSearch"/>
+
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcvItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtNoRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorNextWelcome"
+                    android:textSize="@dimen/_15ssp"
+                    android:padding="@dimen/_10sdp"
+                    android:drawableTop="@mipmap/search_empty_icon"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:fontFamily="@font/p_regular"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

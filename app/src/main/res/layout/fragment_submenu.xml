@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.waitty.waiter.fragment.SubmenuFragment"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Cordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTransparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/SwipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcvItem"
+                    android:clipToPadding="false"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <TextView
+                android:id="@+id/txtNoRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text="@string/no_data"
+                android:textColor="@color/colorNextWelcome"
+                android:textSize="@dimen/_15ssp"
+                android:padding="@dimen/_10sdp"
+                android:drawableTop="@mipmap/empty_plate"
+                android:drawablePadding="@dimen/_15sdp"
+                android:fontFamily="@font/p_regular"/>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.waitty.waiter.activity.HomeActivity"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Cordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/BottomNavigation"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbarActionbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:elevation="@dimen/_3sdp"
+                    android:background="@color/colorWhite"
+                    app:titleTextAppearance="@style/Toolbar_home">
+
+                    <TextView
+                        android:id="@+id/txtHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorNextWelcome"
+                        android:paddingStart="@dimen/_28sdp"
+                        android:gravity="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:text="@string/txt_order_status"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/p_medium"/>
+
+                </android.support.v7.widget.Toolbar>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/BottomNavigation"
+                app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+                app:itemTextAppearanceInactive="@style/BottomNavigationView.Inactive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:layout_alignParentBottom="true"
+                app:labelVisibilityMode="labeled"
+                app:elevation="@dimen/_5sdp"
+                app:menu="@menu/menu_bottom_navigation"
+                app:itemTextColor="@drawable/selector_text_bottom_navigation"/>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

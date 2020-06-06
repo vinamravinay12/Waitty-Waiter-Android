@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.waitty.waiter.fragment.StatusHomeFragment"/>
+
+        <variable
+            name="clickEvent"
+            type="com.waitty.waiter.fragment.StatusHomeFragment.ClickHandler" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Cordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorStatusBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/tabLayoutMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:padding="@dimen/_1sdp"
+                android:background="@drawable/status_tab_background"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:onClick="@{clickEvent::txtNewOrderClick}"
+                        android:id="@+id/txtNewOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/txt_new"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@font/p_semibold"
+                        android:textColor="@color/colorNextWelcome"
+                        android:background="@drawable/round_selected_submenu"/>
+
+                    <LinearLayout
+                        android:id="@+id/layLinCountNew"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_new"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/p_semibold"
+                            android:textColor="@color/colorTransparent"
+                            android:background="@color/colorTransparent"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_minus5sdp"
+                            android:background="@drawable/circle_badge_count"
+                            android:padding="@dimen/_3sdp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:onClick="@{clickEvent::txtProcessingOrderClick}"
+                        android:id="@+id/txtProcessingOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/txt_processing"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@font/p_medium"
+                        android:textColor="@color/colorNextWelcome"
+                        android:background="@color/colorTransparent"/>
+
+                    <LinearLayout
+                        android:id="@+id/layLinCountProcessing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_processing"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/p_semibold"
+                            android:textColor="@color/colorTransparent"
+                            android:background="@color/colorTransparent"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_9sdp"
+                            android:layout_marginTop="@dimen/_minus5sdp"
+                            android:background="@drawable/circle_badge_count"
+                            android:padding="@dimen/_3sdp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:onClick="@{clickEvent::txtServedOrderClick}"
+                    android:id="@+id/txtServedOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/txt_served"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:textSize="@dimen/_11ssp"
+                    android:fontFamily="@font/p_medium"
+                    android:textColor="@color/colorNextWelcome"
+                    android:background="@color/colorTransparent"/>
+
+            </LinearLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

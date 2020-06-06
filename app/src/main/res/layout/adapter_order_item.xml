@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.waitty.waiter.adapter.OrderHistoryItemAdapter"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layRelQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingBottom="@dimen/_7sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@color/colorCardProfile">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorNextWelcome"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/p_medium"
+                android:maxLines="2"
+                android:layout_toStartOf="@+id/layLinQuantity"
+                android:layout_marginEnd="@dimen/_8sdp"/>
+
+            <LinearLayout
+                android:id="@+id/layLinQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/txtQuantity"
+                    android:layout_width="@dimen/_21sdp"
+                    android:layout_height="@dimen/_21sdp"
+                    android:gravity="center"
+                    android:textColor="@color/colorNextWelcome"
+                    android:textSize="@dimen/_11ssp"
+                    android:fontFamily="@font/p_medium"
+                    android:background="@drawable/round_square_count"/>
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:textColor="@color/colorSkipWelcome"
+                    android:textSize="@dimen/_11ssp"
+                    android:fontFamily="@font/p_regular"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtCustomization1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="gone"
+            android:fontFamily="@font/p_light"/>
+
+        <TextView
+            android:id="@+id/txtCustomization2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="gone"
+            android:fontFamily="@font/p_light"/>
+
+        <TextView
+            android:id="@+id/txtCustomization3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="gone"
+            android:fontFamily="@font/p_light"/>
+
+        <TextView
+            android:id="@+id/txtOutOfStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:textColor="@color/colorValidation"
+            android:visibility="gone"
+            android:text="@string/text_outofstock"
+            android:fontFamily="@font/p_light"/>
+
+    </LinearLayout>
+
+</layout>
+

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.waitty.waiter.activity.LoginActivity"/>
+
+        <variable
+            name="clickEvent"
+            type="com.waitty.waiter.activity.LoginActivity.ClickHandler" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Cordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/yallow_gradiant_background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardUseCompatPadding="false"
+                    android:layout_margin="@dimen/_15sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorAlmostDone"
+                            android:textSize="@dimen/_20ssp"
+                            android:layout_marginTop="@dimen/_30sdp"
+                            android:text="@string/txt_signin"
+                            android:fontFamily="@font/p_bold"/>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_45sdp"
+                            style="@style/MyCardViewStyleLogin">
+
+                            <EditText
+                                android:id="@+id/edtWaiterID"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/txt_waiter_id"
+                                android:textColorHint="@color/colorEdtHint"
+                                android:textColor="@color/colorNextWelcome"
+                                android:textSize="@dimen/_12ssp"
+                                android:fontFamily="@font/p_regular"
+                                android:background="@color/colorTransparent"
+                                android:maxLength="20"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:drawableStart="@mipmap/name_icon"
+                                android:drawablePadding="@dimen/_8sdp"/>
+
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/txtErrorWaiterID"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:text="@string/waiterid_length"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginStart="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:drawableStart="@mipmap/error_icon"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:textColor="@color/colorValidation"
+                            android:textSize="@dimen/_9ssp"
+                            android:fontFamily="@font/p_light"/>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_25sdp"
+                            style="@style/MyCardViewStyleLogin">
+
+                            <EditText
+                                android:id="@+id/edtPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/txt_password"
+                                android:textColorHint="@color/colorEdtHint"
+                                android:textColor="@color/colorNextWelcome"
+                                android:textSize="@dimen/_12ssp"
+                                android:fontFamily="@font/p_regular"
+                                android:background="@color/colorTransparent"
+                                android:maxLength="20"
+                                android:imeOptions="actionDone"
+                                android:singleLine="true"
+                                android:inputType="textPassword"
+                                android:drawableStart="@mipmap/password_icon"
+                                android:drawablePadding="@dimen/_8sdp"/>
+
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/txtErrorPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:text="@string/password_length"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginStart="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:drawableStart="@mipmap/error_icon"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:textColor="@color/colorValidation"
+                            android:textSize="@dimen/_9ssp"
+                            android:fontFamily="@font/p_light"/>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_50sdp"
+                            android:layout_marginBottom="@dimen/_30sdp">
+
+                            <TextView
+                                android:id="@+id/btnDiseable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/round_diseable_button"
+                                android:text="@string/txt_login"
+                                android:textColor="@color/colorEdtHint"
+                                android:textSize="@dimen/_12ssp"
+                                android:textAllCaps="false"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:fontFamily="@font/p_semibold"
+                                android:paddingStart="@dimen/_40sdp"
+                                android:paddingEnd="@dimen/_40sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_10sdp"/>
+
+                            <android.support.design.button.MaterialButton
+                                android:onClick="@{clickEvent::loginClick}"
+                                android:id="@+id/btnEnable"
+                                style="@style/material_button_round"
+                                android:text="@string/txt_login"
+                                android:visibility="invisible"
+                                android:textColor="@color/colorNextWelcome"
+                                android:backgroundTint="@color/colorYallow"
+                                android:paddingStart="@dimen/_37sdp"
+                                android:paddingEnd="@dimen/_37sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_10sdp"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

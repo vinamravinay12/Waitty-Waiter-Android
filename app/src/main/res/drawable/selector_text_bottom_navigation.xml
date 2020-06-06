@@ -1,0 +1,5 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/colorEdtHint" android:state_enabled="false"/>
+    <item android:color="@color/colorNextWelcome" android:state_checked="true"/>
+    <item android:color="@color/colorEdtHint"/>
+</selector>
