@@ -2,17 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="adapter"
-            type="com.waitty.waiter.adapter.DishItemAdapter"/>
-
-        <variable
-            name="dish"
-            type="com.waitty.waiter.model.DishData" />
-    </data>
-
     <LinearLayout
         android:id="@+id/LayLinMain"
         android:layout_width="match_parent"
@@ -40,7 +29,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorNextWelcome"
                     android:textSize="@dimen/_13ssp"
-                    android:text="@{dish.name}"
                     android:fontFamily="@font/p_semibold"
                     android:singleLine="true"/>
 
@@ -49,7 +37,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorNextWelcome"
                     android:textSize="@dimen/_10ssp"
-                    android:text="@{dish.description}"
                     android:fontFamily="@font/p_light"
                     android:singleLine="true"/>
 
@@ -125,8 +112,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/dish_holder"
                     android:adjustViewBounds="true"
-                    app:image_type="square"
-                    app:dishImage="@{dish.dishImage}"/>
+                    app:image_type="square" />
 
             </RelativeLayout>
 

@@ -1,12 +1,14 @@
 package com.waitty.waiter.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.graphics.Paint;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.waitty.waiter.R;
 import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.AdapterDishBinding;
@@ -14,9 +16,9 @@ import com.waitty.waiter.model.DishData;
 import com.waitty.waiter.utility.Utility;
 import java.util.LinkedList;
 
-public class DishItemAdapter extends RecyclerView.Adapter<DishItemAdapter.ViewHolder>{
+public class DishItemAdapter{
 
-    private LinkedList<DishData> dataList;
+   /* private LinkedList<DishData> dataList;
     private Context mContext;
     private LayoutInflater layoutInflater;
 
@@ -79,5 +81,5 @@ public class DishItemAdapter extends RecyclerView.Adapter<DishItemAdapter.ViewHo
             this.adapterDishBinding = itemBinding;
         }
 
-    }
+    }*/
 }

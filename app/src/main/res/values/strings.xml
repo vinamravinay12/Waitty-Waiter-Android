@@ -33,6 +33,7 @@
     <string name="txt_password">Password</string>
     <string name="waiterid_length">Waiter ID is too short.</string>
     <string name="password_length">Password is too short.</string>
+    <string name="txt_forgot_password">I forgot my password</string>
 
     <!--HOME SCREEN-->
     <string name="txt_status">Status</string>
@@ -93,5 +94,31 @@
     <!--SEARCH SCREEN-->
     <string name="txt_search">Search</string>
     <string name="txt_search_nodata">No searching result</string>
+
+
+    <string name="txt_all_done">All Done</string>
+    <string name="hint_order_search">Search order number eg 500051</string>
+    <string name="txt_id">ID</string>
+    <string name="username_empty_error">Kitchen Id cannot be empty</string>
+    <string name="password_empty_error">Password cannot be empty</string>
+    <string name="password_length_error">Password should be of atleast 5 characters</string>
+    <string name="something_went_wrong">Something Went Wrong! Please Try Again!</string>
+    <string name="bad_credentials">Wrong Credentials</string>
+    <string name="login_success">Login Successful</string>
+    <string name="unable_to_set_eta">Unable to Set ETA</string>
+    <string name="txt_complete_item_error">Unable to finish this item. Please try again!</string>
+    <string name="rupee_symbol">\u20B9</string>
+    <string name="title_order_history">Order History</string>
+    <string name="title_order_details">Detail - %s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_bottom">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_bottom_nav">MainActivity</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_settings">Settings</string>
 
 </resources>

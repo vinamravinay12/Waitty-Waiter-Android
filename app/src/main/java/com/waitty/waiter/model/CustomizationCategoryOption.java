@@ -1,12 +1,15 @@
 package com.waitty.waiter.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.waitty.waiter.utility.Utility;
 
 import java.io.Serializable;
 
-public class CustomizationCategoryOption implements Serializable {
+public class CustomizationCategoryOption implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -96,4 +99,47 @@ public class CustomizationCategoryOption implements Serializable {
     public void setIsSoldout(Boolean isSoldout) {
         this.isSoldout = isSoldout;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeInt(this.customizationCategoryId);
+        dest.writeInt(this.dishId);
+        dest.writeValue(this.isDefault);
+        dest.writeDouble(this.sellingPrice);
+        dest.writeDouble(this.price);
+        dest.writeValue(this.isSoldout);
+    }
+
+    public CustomizationCategoryOption() {
+    }
+
+    protected CustomizationCategoryOption(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.customizationCategoryId = in.readInt();
+        this.dishId = in.readInt();
+        this.isDefault = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.sellingPrice = in.readDouble();
+        this.price = in.readDouble();
+        this.isSoldout = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<CustomizationCategoryOption> CREATOR = new Parcelable.Creator<CustomizationCategoryOption>() {
+        @Override
+        public CustomizationCategoryOption createFromParcel(Parcel source) {
+            return new CustomizationCategoryOption(source);
+        }
+
+        @Override
+        public CustomizationCategoryOption[] newArray(int size) {
+            return new CustomizationCategoryOption[size];
+        }
+    };
 }

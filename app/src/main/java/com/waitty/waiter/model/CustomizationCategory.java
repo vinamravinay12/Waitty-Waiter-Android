@@ -1,5 +1,8 @@
 package com.waitty.waiter.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.waitty.waiter.utility.Utility;
@@ -7,7 +10,7 @@ import com.waitty.waiter.utility.Utility;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CustomizationCategory implements Serializable {
+public class CustomizationCategory implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -64,4 +67,42 @@ public class CustomizationCategory implements Serializable {
     public void setCustomizationCategoryOptions(ArrayList<CustomizationCategoryOption> customizationCategoryOptions) {
         this.customizationCategoryOptions = customizationCategoryOptions;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.type);
+        dest.writeInt(this.dishId);
+        dest.writeList(this.customizationCategoryOptions);
+    }
+
+    public CustomizationCategory() {
+    }
+
+    protected CustomizationCategory(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.type = in.readString();
+        this.dishId = in.readInt();
+        this.customizationCategoryOptions = new ArrayList<CustomizationCategoryOption>();
+        in.readList(this.customizationCategoryOptions, CustomizationCategoryOption.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<CustomizationCategory> CREATOR = new Parcelable.Creator<CustomizationCategory>() {
+        @Override
+        public CustomizationCategory createFromParcel(Parcel source) {
+            return new CustomizationCategory(source);
+        }
+
+        @Override
+        public CustomizationCategory[] newArray(int size) {
+            return new CustomizationCategory[size];
+        }
+    };
 }

@@ -1,22 +1,8 @@
 package com.waitty.waiter.adapter;
 
-import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.waitty.waiter.R;
-import com.waitty.waiter.constant.constant;
-import com.waitty.waiter.databinding.AdapterOrderItemBinding;
-import com.waitty.waiter.model.OrderDetails;
-import java.util.List;
+public class OrderHistoryItemAdapter {
 
-public class OrderHistoryItemAdapter extends RecyclerView.Adapter<OrderHistoryItemAdapter.ViewHolder>{
-
-    private List<OrderDetails.OrderItem> dataList;
+   /* private List<OrderDetails.OrderItem> dataList;
     private Context mContext;
     private LayoutInflater layoutInflater;
     private String paymentSymbol;
@@ -157,5 +143,5 @@ public class OrderHistoryItemAdapter extends RecyclerView.Adapter<OrderHistoryIt
             super(itemBinding.getRoot());
             this.adapterOrderItemBinding = itemBinding;
         }
-    }
+    }*/
 }

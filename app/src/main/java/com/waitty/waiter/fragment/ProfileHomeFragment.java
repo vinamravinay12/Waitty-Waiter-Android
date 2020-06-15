@@ -1,39 +1,23 @@
 package com.waitty.waiter.fragment;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CompoundButton;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
-import com.waitty.waiter.appinterface.getResponseData;
-import com.waitty.waiter.constant.constant;
+
+import androidx.fragment.app.Fragment;
+
 import com.waitty.waiter.databinding.FragmentProfileHomeBinding;
 import com.waitty.waiter.model.LoginUser;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
-import com.waitty.waiter.utility.Dialog;
-import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
-import retrofit2.Call;
 
-public class ProfileHomeFragment extends Fragment implements getResponseData {
+public class ProfileHomeFragment extends Fragment  {
 
     private ViewGroup root;
     private Context mContext;
     FragmentProfileHomeBinding fragmentProfileHomeBinding;
-    private ClickHandler mclickHandler;
+  //  private ClickHandler mclickHandler;
     private LoginUser userInformation;
 
     @Override
@@ -46,22 +30,22 @@ public class ProfileHomeFragment extends Fragment implements getResponseData {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        fragmentProfileHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_home, container, false);
+       // fragmentProfileHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_home, container, false);
         root = (ViewGroup) fragmentProfileHomeBinding.getRoot();
         mContext = getContext();
-        init();
+  //      init();
         return root;
     }
 
     // Variable initialization
-    private void init() {
+  /*  private void init() {
         mclickHandler = new ClickHandler();
         fragmentProfileHomeBinding.setClickEvent(mclickHandler);
         setUserData();
-    }
+    }*/
 
     // Set user information
-    private void setUserData() {
+   /* private void setUserData() {
         Type type = new TypeToken<LoginUser>() { }.getType();
         userInformation = new Gson().fromJson(Utility.getSharedPreferencesString(mContext, constant.USER_INFORMATION), type);
 
@@ -151,5 +135,5 @@ public class ProfileHomeFragment extends Fragment implements getResponseData {
                     break;
             }
         }
-    }
+    }*/
 }

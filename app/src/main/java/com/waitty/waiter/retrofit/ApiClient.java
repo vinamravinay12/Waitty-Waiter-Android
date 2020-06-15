@@ -39,6 +39,10 @@ public class ApiClient {
         return httpClient;
     }
 
+    public static ApiInterface getAPIInterface() {
+        return getClient().create(ApiInterface.class);
+    }
+
 }
 
 

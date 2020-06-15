@@ -1,19 +1,16 @@
 package com.waitty.waiter.model;
 
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.squareup.picasso.Picasso;
-import com.waitty.waiter.R;
 import com.waitty.waiter.utility.Utility;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class DishData implements Serializable {
+public class DishData implements Parcelable {
 
     /*double selling_price,price;
     String name,dish_image,description;
@@ -184,10 +181,52 @@ public class DishData implements Serializable {
         this.customizationCategories = customizationCategories;
     }
 
-    @BindingAdapter({"dishImage"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        if(!imageUrl.isEmpty())
-            Picasso.get().load(imageUrl).placeholder(R.drawable.dish_holder).error(R.drawable.dish_holder).into(view);
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.dishImage);
+        dest.writeInt(this.categoryId);
+        dest.writeInt(this.subcategoryId);
+        dest.writeString(this.description);
+        dest.writeDouble(this.sellingPrice);
+        dest.writeDouble(this.price);
+        dest.writeValue(this.isSoldout);
+        dest.writeList(this.customizationCategories);
+    }
+
+    public DishData() {
+    }
+
+    protected DishData(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.dishImage = in.readString();
+        this.categoryId = in.readInt();
+        this.subcategoryId = in.readInt();
+        this.description = in.readString();
+        this.sellingPrice = in.readDouble();
+        this.price = in.readDouble();
+        this.isSoldout = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.customizationCategories = new ArrayList<CustomizationCategory>();
+        in.readList(this.customizationCategories, CustomizationCategory.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<DishData> CREATOR = new Parcelable.Creator<DishData>() {
+        @Override
+        public DishData createFromParcel(Parcel source) {
+            return new DishData(source);
+        }
+
+        @Override
+        public DishData[] newArray(int size) {
+            return new DishData[size];
+        }
+    };
 }

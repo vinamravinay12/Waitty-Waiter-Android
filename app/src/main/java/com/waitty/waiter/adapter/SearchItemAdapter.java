@@ -1,44 +1,8 @@
 package com.waitty.waiter.adapter;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
+public class SearchItemAdapter  {
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
-import com.waitty.waiter.activity.SearchActivity;
-import com.waitty.waiter.appinterface.getResponseData;
-import com.waitty.waiter.constant.constant;
-import com.waitty.waiter.databinding.AdapterSearchItemBinding;
-import com.waitty.waiter.databinding.DialogLogoutBinding;
-import com.waitty.waiter.model.LoginUser;
-import com.waitty.waiter.model.OrderDetails;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
-import com.waitty.waiter.utility.Dialog;
-import com.waitty.waiter.utility.MyLoading;
-import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
-import java.util.LinkedList;
-import retrofit2.Call;
-
-public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> implements getResponseData {
-
-    private LinkedList<OrderDetails> dataList;
+   /* private LinkedList<OrderDetails> dataList;
     private Context mContext;
     private LayoutInflater layoutInflater;
     private MyLoading loader;
@@ -449,5 +413,5 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     break;
             }
         }
-    }
+    }*/
 }

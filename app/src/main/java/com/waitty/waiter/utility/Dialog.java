@@ -1,28 +1,16 @@
 package com.waitty.waiter.utility;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Window;
-import com.waitty.waiter.R;
-import com.waitty.waiter.databinding.DialogLogoutBinding;
 
 public class Dialog {
 
     private static AlertDialog dialogLogout,dialogPermission;
 
     // Application logout dialog
-    public static void showLogoutDialog(final Context context) {
+   /* public static void showLogoutDialog(final Context context) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        DialogLogoutBinding dialogLogoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_logout, null, false);
+     //   DialogLogoutBinding dialogLogoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_logout, null, false);
         builder.setView(dialogLogoutBinding.getRoot());
 
         dialogLogout = builder.create();
@@ -178,5 +166,5 @@ public class Dialog {
         dialogPermission.show();
         dialogPermission.getButton(dialogPermission.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorYallow));
         dialogPermission.getButton(dialogPermission.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.colorYallow));
-    }
+    }*/
 }

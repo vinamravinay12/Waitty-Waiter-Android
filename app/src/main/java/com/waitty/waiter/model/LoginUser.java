@@ -1,6 +1,8 @@
 package com.waitty.waiter.model;
 
+
 import com.waitty.waiter.utility.Utility;
+
 import java.util.List;
 
 public class LoginUser {

@@ -1,20 +1,17 @@
 package com.waitty.waiter.fragment;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import com.waitty.waiter.R;
+
+import androidx.fragment.app.Fragment;
+
 import com.waitty.waiter.adapter.PagerAdapterOrder;
-import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.FragmentStatusHomeBinding;
-import com.waitty.waiter.utility.Utility;
 
 public class StatusHomeFragment extends Fragment {
 
@@ -22,7 +19,7 @@ public class StatusHomeFragment extends Fragment {
     private Context mContext;
     FragmentStatusHomeBinding fragmentStatusHomeBinding;
     public PagerAdapterOrder adapter;
-    private ClickHandler mclickHandler;
+ //   private ClickHandler mclickHandler;
     private Typeface type,typeBold;
     private int currentTab;
 
@@ -36,15 +33,15 @@ public class StatusHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        fragmentStatusHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_status_home, container, false);
+       // fragmentStatusHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_status_home, container, false);
         root = (ViewGroup) fragmentStatusHomeBinding.getRoot();
         mContext = getContext();
-        init();
+     //   init();
         return root;
     }
 
     // Variable initialization
-    private void init() {
+   /* private void init() {
         type = Typeface.createFromAsset(mContext.getAssets(), "p_medium.TTF");
         typeBold = Typeface.createFromAsset(mContext.getAssets(), "p_semibold.TTF");
         mclickHandler = new ClickHandler();
@@ -206,6 +203,6 @@ public class StatusHomeFragment extends Fragment {
             }
         }
 
-    }
+    }*/
 
 }

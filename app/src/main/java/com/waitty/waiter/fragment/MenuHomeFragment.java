@@ -1,38 +1,20 @@
 package com.waitty.waiter.fragment;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
-import com.waitty.waiter.activity.HomeActivity;
+import androidx.fragment.app.Fragment;
+
 import com.waitty.waiter.adapter.PagerAdapterMenu;
-import com.waitty.waiter.appinterface.getResponseData;
-import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.FragmentMenuHomeBinding;
 import com.waitty.waiter.model.MenuData;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
-import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
-import retrofit2.Call;
 
-public class MenuHomeFragment extends Fragment implements getResponseData {
+public class MenuHomeFragment extends Fragment  {
 
     private ViewGroup root;
     private Context mContext;
@@ -51,7 +33,7 @@ public class MenuHomeFragment extends Fragment implements getResponseData {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        fragmentMenuHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu_home, container, false);
+       // fragmentMenuHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu_home, container, false);
         root = (ViewGroup) fragmentMenuHomeBinding.getRoot();
         mContext = getContext();
         init();
@@ -62,11 +44,11 @@ public class MenuHomeFragment extends Fragment implements getResponseData {
     private void init() {
         type = Typeface.createFromAsset(mContext.getAssets(), "p_medium.TTF");
         typeBold = Typeface.createFromAsset(mContext.getAssets(), "p_bold.TTF");
-        getMenuDataAPI();
+      //  getMenuDataAPI();
     }
 
     // Restaurant menu data
-    private void getMenuDataAPI() {
+   /* private void getMenuDataAPI() {
         try{
             JsonObject jsonObject=new JsonObject();
             jsonObject.addProperty(API.RESTAURANT_ID, ((HomeActivity)mContext).userInformation.getParentId());
@@ -79,9 +61,9 @@ public class MenuHomeFragment extends Fragment implements getResponseData {
             e.printStackTrace();
         }
     }
-
+*/
     // Set tab and pager data
-    private void setPager() {
+   /* private void setPager() {
 
         adapter=new PagerAdapterMenu(getChildFragmentManager(),mContext, menuDataList);
         fragmentMenuHomeBinding.pager.setAdapter(adapter);
@@ -160,6 +142,6 @@ public class MenuHomeFragment extends Fragment implements getResponseData {
         fragmentMenuHomeBinding.tabLayout.setVisibility(View.GONE);
         fragmentMenuHomeBinding.pager.setVisibility(View.GONE);
         fragmentMenuHomeBinding.txtNoRecord.setVisibility(View.VISIBLE);
-    }
+    }*/
 
 }

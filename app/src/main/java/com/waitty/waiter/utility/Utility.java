@@ -1,5 +1,6 @@
 package com.waitty.waiter.utility;
 
+import android.animation.ObjectAnimator;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -8,17 +9,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.SystemClock;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.translabtechnologies.visitormanagementsystem.vmshost.database.SharedPreferenceManager;
 import com.waitty.waiter.R;
 import com.waitty.waiter.activity.LoginActivity;
 import com.waitty.waiter.appinterface.getResponseData;
@@ -29,11 +34,16 @@ import com.waitty.waiter.retrofit.API;
 import com.waitty.waiter.retrofit.APICall;
 import com.waitty.waiter.retrofit.ApiClient;
 import com.waitty.waiter.retrofit.ApiInterface;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
 import retrofit2.Call;
 
 public class Utility {
@@ -105,7 +115,7 @@ public class Utility {
         snackbar.setActionTextColor(ContextCompat.getColor(context, R.color.colorYallow));
 
         View snackbarView = snackbar.getView();
-        int snackbarTextId = android.support.design.R.id.snackbar_text;
+        int snackbarTextId = R.id.snackbar_text;
         TextView textView = (TextView) snackbarView.findViewById(snackbarTextId);
         textView.setMaxLines(3);
 
@@ -200,7 +210,7 @@ public class Utility {
             new APICall(context).Server_Interaction(call, new getResponseData() {
                 @Override
                 public void onSuccess(JSONObject OBJ, String msg, String typeAPI) {
-                    Dialog.showApplicationUpdateDialog(context,msg);
+                 //   Dialog.showApplicationUpdateDialog(context,msg);
                 }
 
                 @Override
@@ -303,6 +313,53 @@ public class Utility {
         }// category if
 
         return totalAmount;
+    }
+
+
+    public static void doShakeAnimation(View view) {
+        ObjectAnimator
+                .ofFloat(view, "translationX", 0f, 25f, -25f, 25f, -25f, 15f, -15f, 6f, -6f, 0f)
+                .setDuration(200)
+                .start();
+    }
+
+
+    public static boolean isTablet(Context context) {
+        try {
+            DisplayMetrics dm =
+                    context.getResources().getDisplayMetrics();
+            float screenWidth = dm.widthPixels / dm.xdpi;
+            float screenHeight = dm.heightPixels / dm.ydpi;
+            double size = Math.sqrt(Math.pow(screenWidth, 2) +
+                    Math.pow(screenHeight, 2));
+
+            return size >= 6;
+        } catch (Throwable t) {
+            Log.e("LogError", t.toString());
+            return false;
+        }
+
+    }
+
+    public static String getToken(Context context) {
+        return new SharedPreferenceManager(context,constant.LOGIN_SP).getStringPreference(API.AUTHORIZATION);
+    }
+
+
+    public static String getMessageOnErrorCode(@Nullable Integer errorCode, Context context) {
+        switch (errorCode) {
+         //   case API.NETWORK_ERROR : return context.getString(R.string.network_not_found);
+            case API.BLOCK_ADMIN : return context.getString(R.string.block_admin_msg);
+            case API.SESSION_EXPIRE : return context.getString(R.string.session_expire_msg);
+            default: return context.getString(R.string.something_went_wrong);
+        }
+
+    }
+
+
+    public static String getStringFrom(@Nullable Date arrivalDate, @NotNull String displayDateTimeFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(displayDateTimeFormat);
+        return simpleDateFormat.format(arrivalDate);
     }
 
 }// final class ends here

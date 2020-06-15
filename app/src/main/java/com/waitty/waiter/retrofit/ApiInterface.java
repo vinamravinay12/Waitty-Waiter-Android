@@ -2,6 +2,11 @@ package com.waitty.waiter.retrofit;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.waitty.waiter.model.apimodels.LoginResponse;
+import com.waitty.waiter.model.apimodels.OrderResponse;
+import com.waitty.waiter.model.postdatamodels.GetOrderPostData;
+import com.waitty.waiter.model.postdatamodels.LoginData;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -12,7 +17,7 @@ import retrofit2.http.PUT;
 public interface ApiInterface {
 
     @POST(API.LOGIN)
-    Call<JsonElement> login(@Body JsonObject OBJ);
+    Call<LoginResponse> login(@Body LoginData loginData);
 
     @POST(API.APPVERSION)
     Call<JsonElement> checkVersion(@Body JsonObject OBJ);
@@ -30,13 +35,13 @@ public interface ApiInterface {
     Call<JsonElement> logoutApplication(@Header(API.AUTHORIZATION) String token);
 
     @POST(API.GET_NEW_ORDER)
-    Call<JsonElement> getNewOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<OrderResponse> getNewOrder(@Body GetOrderPostData orderPostData, @Header(API.AUTHORIZATION) String token);
 
     @POST(API.GET_PROCESSING_ORDER)
-    Call<JsonElement> getProcessingOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<OrderResponse> getProcessingOrder(@Body GetOrderPostData orderPostData,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.GET_SERVED_ORDER)
-    Call<JsonElement> getServedOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<OrderResponse> getServedOrder(@Body GetOrderPostData orderPostData,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.ACCEPT_ORDER)
     Call<JsonElement> acceptOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
@@ -45,13 +50,13 @@ public interface ApiInterface {
     Call<JsonElement> rejectOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.DELIVERD_ORDER)
-    Call<JsonElement> deliverdOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<JsonElement> deliverOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.SEARCH_ORDER)
     Call<JsonElement> searchOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.ORDER_STATUS)
-    Call<JsonElement> checkOrderStatus(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<OrderResponse> checkOrderStatus(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
 }
 

@@ -1,183 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="activity"
-            type="com.waitty.waiter.activity.LoginActivity"/>
+<data>
+    <variable
+        name="LoginVM"
+        type="com.waitty.waiter.viewmodel.LoginViewModel" />
+    <variable
+        name="clickEvent"
+        type="com.waitty.waiter.utility.WKClickListener" />
 
-        <variable
-            name="clickEvent"
-            type="com.waitty.waiter.activity.LoginActivity.ClickHandler" />
-    </data>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/Cordinator"
+    <import type="com.waitty.waiter.viewmodel.ClickType" />
+</data>
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/yallow_gradiant_background">
-
-        <ScrollView
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_height="match_parent"
+            android:id="@+id/viewLogin"
+            tools:visibility="visible">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputWaiterIdLayout"
+                android:layout_width="290dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="1dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/txt_id"
+                app:boxStrokeColor="@color/colorWaiterIdText"
+                app:boxStrokeWidth="@dimen/_1dp"
+                android:textColorHint="@color/colorTabItemTextSelected"
+                app:hintTextColor="@color/colorTabItemTextSelected"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <android.support.v7.widget.CardView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etWaiterId"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardUseCompatPadding="false"
-                    android:layout_margin="@dimen/_15sdp">
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_14sp"
+                    android:text="@={LoginVM.waiterId}"
+                    android:textColor="@color/colorTabItemTextSelected"
+                    android:fontFamily="@font/bwnistageo_medium" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputPasswordLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="290dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="1dp"
+                android:hint="@string/txt_password"
+                android:textColorHint="@color/colorTabItemTextSelected"
+                app:boxStrokeColor="@color/colorWaiterIdText"
+                app:boxStrokeWidth="@dimen/_1dp"
+                app:hintTextColor="@color/colorTabItemTextSelected"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputWaiterIdLayout"
+                app:passwordToggleEnabled="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorAlmostDone"
-                            android:textSize="@dimen/_20ssp"
-                            android:layout_marginTop="@dimen/_30sdp"
-                            android:text="@string/txt_signin"
-                            android:fontFamily="@font/p_bold"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bwnistageo_medium"
+                    android:inputType="textPassword"
+                    android:text="@={LoginVM.password}"
+                    android:textColor="@color/colorTabItemTextSelected"
+                    android:textSize="@dimen/_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                        <android.support.v7.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_45sdp"
-                            style="@style/MyCardViewStyleLogin">
+            <TextView
+                android:id="@+id/tvIdError"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="Email not valid"
+                style="@style/ErrorTextTheme"
+                android:text='@{LoginVM.userIdError.intValue() > 0 ? context.getString(LoginVM.userIdError.intValue()) : ""}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputWaiterIdLayout" />
 
-                            <EditText
-                                android:id="@+id/edtWaiterID"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/txt_waiter_id"
-                                android:textColorHint="@color/colorEdtHint"
-                                android:textColor="@color/colorNextWelcome"
-                                android:textSize="@dimen/_12ssp"
-                                android:fontFamily="@font/p_regular"
-                                android:background="@color/colorTransparent"
-                                android:maxLength="20"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true"
-                                android:drawableStart="@mipmap/name_icon"
-                                android:drawablePadding="@dimen/_8sdp"/>
+            <TextView
+                android:id="@+id/tvErrorPassword"
+                style="@style/ErrorTextTheme"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:text='@{LoginVM.passwordError.intValue() > 0 ? context.getString(LoginVM.passwordError.intValue()) : ""}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputPasswordLayout"
+                tools:text="TextView" />
 
-                        </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/BtnLogin"
+                android:drawableEnd="@drawable/ic_action_name"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/txt_signin"
+                app:backgroundTint="@color/colorTxtLink"
+                app:cornerRadius="@dimen/_25dp"
+                app:elevation="0dp"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvErrorPassword" />
 
-                        <TextView
-                            android:id="@+id/txtErrorWaiterID"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            android:text="@string/waiterid_length"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_25sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:drawableStart="@mipmap/error_icon"
-                            android:drawablePadding="@dimen/_5sdp"
-                            android:textColor="@color/colorValidation"
-                            android:textSize="@dimen/_9ssp"
-                            android:fontFamily="@font/p_light"/>
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="320dp"
+                android:fontFamily="@font/bwnistageo_bold"
+                android:text="@string/txt_forgot_password"
+                android:textColor="@color/colorTxtLink"
+                android:textSize="@dimen/_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <android.support.v7.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_25sdp"
-                            style="@style/MyCardViewStyleLogin">
+        <include layout="@layout/layout_custom_loading"
+            android:id="@+id/layoutLoader"
+            tools:visibility="gone"/>
 
-                            <EditText
-                                android:id="@+id/edtPassword"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/txt_password"
-                                android:textColorHint="@color/colorEdtHint"
-                                android:textColor="@color/colorNextWelcome"
-                                android:textSize="@dimen/_12ssp"
-                                android:fontFamily="@font/p_regular"
-                                android:background="@color/colorTransparent"
-                                android:maxLength="20"
-                                android:imeOptions="actionDone"
-                                android:singleLine="true"
-                                android:inputType="textPassword"
-                                android:drawableStart="@mipmap/password_icon"
-                                android:drawablePadding="@dimen/_8sdp"/>
+        <include layout="@layout/layout_connection_error"
+            tools:visibility="gone"
+            android:id="@+id/layoutError"/>
+    </FrameLayout>
 
-                        </android.support.v7.widget.CardView>
-
-                        <TextView
-                            android:id="@+id/txtErrorPassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            android:text="@string/password_length"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_25sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:drawableStart="@mipmap/error_icon"
-                            android:drawablePadding="@dimen/_5sdp"
-                            android:textColor="@color/colorValidation"
-                            android:textSize="@dimen/_9ssp"
-                            android:fontFamily="@font/p_light"/>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_50sdp"
-                            android:layout_marginBottom="@dimen/_30sdp">
-
-                            <TextView
-                                android:id="@+id/btnDiseable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/round_diseable_button"
-                                android:text="@string/txt_login"
-                                android:textColor="@color/colorEdtHint"
-                                android:textSize="@dimen/_12ssp"
-                                android:textAllCaps="false"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:fontFamily="@font/p_semibold"
-                                android:paddingStart="@dimen/_40sdp"
-                                android:paddingEnd="@dimen/_40sdp"
-                                android:paddingTop="@dimen/_10sdp"
-                                android:paddingBottom="@dimen/_10sdp"/>
-
-                            <android.support.design.button.MaterialButton
-                                android:onClick="@{clickEvent::loginClick}"
-                                android:id="@+id/btnEnable"
-                                style="@style/material_button_round"
-                                android:text="@string/txt_login"
-                                android:visibility="invisible"
-                                android:textColor="@color/colorNextWelcome"
-                                android:backgroundTint="@color/colorYallow"
-                                android:paddingStart="@dimen/_37sdp"
-                                android:paddingEnd="@dimen/_37sdp"
-                                android:paddingTop="@dimen/_10sdp"
-                                android:paddingBottom="@dimen/_10sdp"/>
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-            </RelativeLayout>
-
-        </ScrollView>
-
-    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

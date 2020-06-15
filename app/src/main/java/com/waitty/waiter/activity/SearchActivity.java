@@ -1,46 +1,24 @@
 package com.waitty.waiter.activity;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.waitty.waiter.adapter.SearchItemAdapter;
-import com.waitty.waiter.appinterface.getResponseData;
-import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.ActivitySearchBinding;
 import com.waitty.waiter.model.OrderDetails;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
 import com.waitty.waiter.utility.MyLoading;
-import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
+
 import java.util.LinkedList;
 import java.util.Timer;
-import java.util.TimerTask;
-import retrofit2.Call;
 
-public class SearchActivity extends AppCompatActivity implements getResponseData {
+public class SearchActivity extends AppCompatActivity {
     private Context mContext;
     private ActivitySearchBinding activitySearchBinding;
     private  MenuItem cancelItem,arrowItem;
@@ -70,13 +48,13 @@ public class SearchActivity extends AppCompatActivity implements getResponseData
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        activitySearchBinding= DataBindingUtil.setContentView(this, R.layout.activity_search);
+       // activitySearchBinding= DataBindingUtil.setContentView(this, R.layout.activity_search);
         mContext = this;
-        init();
+    //    init();
     }
 
     // Variable initialization
-    private void init() {
+  /*  private void init() {
 
         loader = new MyLoading(mContext);
         setToolbar();
@@ -85,10 +63,10 @@ public class SearchActivity extends AppCompatActivity implements getResponseData
 
         LinLayManager=new LinearLayoutManager(mContext);
         LinLayManager.setOrientation(LinearLayoutManager.VERTICAL);
-        activitySearchBinding.rcvItem.setLayoutManager(LinLayManager);
+       // activitySearchBinding.rcvItem.setLayoutManager(LinLayManager);
         adapter = new SearchItemAdapter(mContext,itemList);
-        activitySearchBinding.rcvItem.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+      //  activitySearchBinding.rcvItem.setAdapter(adapter);
+     //   adapter.notifyDataSetChanged();
 
         activitySearchBinding.edtSearch.addTextChangedListener(new TextWatcher() {
 
@@ -280,7 +258,7 @@ public class SearchActivity extends AppCompatActivity implements getResponseData
                     break;
             }
         }
-    }
+    }*/
 
 }
 

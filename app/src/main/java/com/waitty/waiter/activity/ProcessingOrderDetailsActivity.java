@@ -1,40 +1,21 @@
 package com.waitty.waiter.activity;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.Html;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
-import com.waitty.waiter.adapter.OrderHistoryItemAdapter;
-import com.waitty.waiter.appinterface.getResponseData;
-import com.waitty.waiter.constant.constant;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.waitty.waiter.databinding.ActivityNeworderDetailsBinding;
 import com.waitty.waiter.model.OrderDetails;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
 import com.waitty.waiter.utility.MyLoading;
-import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
-import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
-import retrofit2.Call;
 
-public class ProcessingOrderDetailsActivity extends AppCompatActivity implements getResponseData {
+import java.util.Timer;
+
+public class ProcessingOrderDetailsActivity extends AppCompatActivity {
 
     private Context mContext;
     private ActivityNeworderDetailsBinding activityNeworderDetailsBinding;
@@ -62,13 +43,13 @@ public class ProcessingOrderDetailsActivity extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        activityNeworderDetailsBinding= DataBindingUtil.setContentView(this, R.layout.activity_neworder_details);
+      //  activityNeworderDetailsBinding= DataBindingUtil.setContentView(this, R.layout.activity_neworder_details);
         mContext = this;
-        init();
+     //   init();
     }
 
     // Variable initialization
-    private void init() {
+ /*   private void init() {
         try{
 
             loader = new MyLoading(mContext);
@@ -302,6 +283,6 @@ public class ProcessingOrderDetailsActivity extends AppCompatActivity implements
                     break;
             }
         }
-    }
+    }*/
 
 }

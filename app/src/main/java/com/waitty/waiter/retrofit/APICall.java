@@ -42,10 +42,10 @@ public class APICall {
                             } else {
 
                                 if (response.code() == API.SESSION_EXPIRE) {
-                                    Dialog.showAdminBlockTokenExpireDialog(mContext, mContext.getString(R.string.session_expire), mContext.getString(R.string.session_expire_msg));
+                                 //   Dialog.showAdminBlockTokenExpireDialog(mContext, mContext.getString(R.string.session_expire), mContext.getString(R.string.session_expire_msg));
                                     returnData.onFailed("",typeAPI);
                                 }else if(response.code() == API.BLOCK_ADMIN){
-                                    Dialog.showAdminBlockTokenExpireDialog(mContext, mContext.getString(R.string.block_admin), mContext.getString(R.string.block_admin_msg));
+                                 //   Dialog.showAdminBlockTokenExpireDialog(mContext, mContext.getString(R.string.block_admin), mContext.getString(R.string.block_admin_msg));
                                     returnData.onFailed("",typeAPI);
                                 }else if (response.code() == API.OTHER_FAILED) {
                                     JSONObject MainOBJ = new JSONObject(response.errorBody().string());

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.waitty.waiter.fragment.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.waitty.waiter.fragment.MenuFragment"
+        android:label="MenuFragment" />
+    <fragment
+        android:id="@+id/profileHomeFragment"
+        android:name="com.waitty.waiter.fragment.ProfileHomeFragment"
+        android:label="ProfileHomeFragment" />
+</navigation>

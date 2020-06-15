@@ -1,21 +1,20 @@
 package com.waitty.waiter.fragment;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
-import com.waitty.waiter.R;
+
+import androidx.fragment.app.Fragment;
+
 import com.waitty.waiter.adapter.PagerAdapterSubmenu;
 import com.waitty.waiter.databinding.FragmentMenuBinding;
 import com.waitty.waiter.model.SubCategory;
 import com.waitty.waiter.retrofit.API;
+
 import java.util.ArrayList;
 
 public class MenuFragment extends Fragment {
@@ -37,7 +36,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        fragmentMenuBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false);
+       // fragmentMenuBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false);
         root = (ViewGroup) fragmentMenuBinding.getRoot();
         mContext = getContext();
 
@@ -48,12 +47,12 @@ public class MenuFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        init();
+       // init();
         return root;
     }
 
     // Variable initialization
-    private void init() {
+    /*private void init() {
         type = Typeface.createFromAsset(mContext.getAssets(), "p_regular.TTF");
         typeBold = Typeface.createFromAsset(mContext.getAssets(), "p_semibold.TTF");
         if(subCategoryDataList!=null && subCategoryDataList.size()>0)
@@ -104,5 +103,5 @@ public class MenuFragment extends Fragment {
             }
         });
 
-    }
+    }*/
 }

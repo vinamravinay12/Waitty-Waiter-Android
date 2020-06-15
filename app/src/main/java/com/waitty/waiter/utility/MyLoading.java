@@ -2,10 +2,8 @@ package com.waitty.waiter.utility;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.view.LayoutInflater;
 import android.view.Window;
-import com.waitty.waiter.R;
+
 import com.waitty.waiter.databinding.LayoutCustomLoadingBinding;
 
 public class MyLoading {
@@ -20,7 +18,7 @@ public class MyLoading {
             dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-            layoutCustomLoadingBinding = (LayoutCustomLoadingBinding)DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_custom_loading, null, false);
+           // layoutCustomLoadingBinding = (LayoutCustomLoadingBinding)DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_custom_loading, null, false);
             dialog.setContentView(layoutCustomLoadingBinding.getRoot());
             dialog.getWindow().setLayout(-1, -2);
             dialog.setCancelable(false);

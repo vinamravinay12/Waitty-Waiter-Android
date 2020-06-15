@@ -1,39 +1,25 @@
 package com.waitty.waiter.fragment;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.waitty.waiter.R;
-import com.waitty.waiter.activity.HomeActivity;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.waitty.waiter.adapter.OrderHistoryAdapter;
-import com.waitty.waiter.appinterface.getResponseData;
 import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.FragmentNeworderListBinding;
 import com.waitty.waiter.model.OrderDetails;
-import com.waitty.waiter.retrofit.API;
-import com.waitty.waiter.retrofit.APICall;
-import com.waitty.waiter.retrofit.ApiClient;
-import com.waitty.waiter.retrofit.ApiInterface;
 import com.waitty.waiter.utility.MyLoading;
 import com.waitty.waiter.utility.Utility;
-import org.json.JSONObject;
-import java.lang.reflect.Type;
-import java.util.LinkedList;
-import retrofit2.Call;
 
-public class ServedOrderListFragment extends Fragment implements getResponseData {
+import java.util.LinkedList;
+
+public class ServedOrderListFragment extends Fragment {
     private ViewGroup root;
     private Context mContext;
     FragmentNeworderListBinding fragmentNeworderListBinding;
@@ -54,22 +40,22 @@ public class ServedOrderListFragment extends Fragment implements getResponseData
 
         if(Utility.getSharedPreferencesBoolean(mContext, constant.SERVED_ORDER_RELOAD)){
             Utility.setSharedPreferencesBoolean(mContext,constant.SERVED_ORDER_RELOAD,false);
-            if (Utility.isNetworkAvailable(mContext))
-                refreshList(false);
+           /* if (Utility.isNetworkAvailable(mContext))
+                refreshList(false);*/
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentNeworderListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_neworder_list, container, false);
+       // fragmentNeworderListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_neworder_list, container, false);
         root = (ViewGroup) fragmentNeworderListBinding.getRoot();
         mContext = getContext();
-        init();
+       // init();
         return root;
     }
 
     // Variable initialization
-    private void init() {
+  /*  private void init() {
         Utility.setSharedPreferencesBoolean(mContext,constant.SERVED_ORDER_RELOAD,false);
         loader = new MyLoading(mContext);
         itemList.clear();
@@ -241,5 +227,5 @@ public class ServedOrderListFragment extends Fragment implements getResponseData
             ((HomeActivity)mContext).pagerAdapterHome.statusHomeFragment.changeBackgroundColor(2,false);
         else
             ((HomeActivity)mContext).pagerAdapterHome.statusHomeFragment.changeBackgroundColor(2,true);
-    }
+    }*/
 }

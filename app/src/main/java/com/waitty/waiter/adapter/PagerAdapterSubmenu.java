@@ -3,17 +3,20 @@ package com.waitty.waiter.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.waitty.waiter.R;
 import com.waitty.waiter.fragment.SubmenuFragment;
 import com.waitty.waiter.model.SubCategory;
 import com.waitty.waiter.retrofit.API;
+
 import java.util.ArrayList;
 
 public class PagerAdapterSubmenu extends FragmentPagerAdapter {

@@ -2,18 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
 
-        <variable
-            name="fragment"
-            type="com.waitty.waiter.fragment.StatusHomeFragment"/>
-
-        <variable
-            name="clickEvent"
-            type="com.waitty.waiter.fragment.StatusHomeFragment.ClickHandler" />
-    </data>
-
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/Cordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +32,6 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:onClick="@{clickEvent::txtNewOrderClick}"
                         android:id="@+id/txtNewOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -90,7 +79,6 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:onClick="@{clickEvent::txtProcessingOrderClick}"
                         android:id="@+id/txtProcessingOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,7 +121,6 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:onClick="@{clickEvent::txtServedOrderClick}"
                     android:id="@+id/txtServedOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,13 +136,13 @@
 
             </LinearLayout>
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

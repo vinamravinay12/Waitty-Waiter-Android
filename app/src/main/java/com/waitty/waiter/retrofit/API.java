@@ -44,4 +44,15 @@ public class API {
     public static final String ORDER_ID= "orderId";
     public static final String ORDER_ID_DISPLAY= "order_id_display";
 
+    //LOGIN response
+    public static final String USER_ID = "id";
+    public static final String PARENT_ID = "parentId";
+    public static final String COUNTRYCODE = "country_code";
+    public static final String EMAIL = "email";
+    public static final String MOBILE = "mobile";
+    public static final String KITCHEN_NAME = "name";
+    public static final String PROFILE_IMAGE = "profile_image";
+    public static final String KITCHEN_ID = "key";
+    public static final String RESTAURANT = "restaurant";
+
 }
