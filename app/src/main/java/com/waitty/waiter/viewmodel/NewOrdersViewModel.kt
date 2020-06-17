@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.waitty.waiter.R
 import com.waitty.waiter.adapter.GenericOrderAdapter
 import com.waitty.waiter.adapter.NewOrderAdapter
+import com.waitty.waiter.model.LoginUser
 import com.waitty.waiter.model.OrderDetails
 import com.waitty.waiter.model.WaittyAPIResponse
 import com.waitty.waiter.model.postdatamodels.GetOrderPostData
 import com.waitty.waiter.retrofit.ApiClient
+import com.waitty.waiter.utility.Utility
 import com.waitty.waiter.utility.WKItemClickListener
 import com.waitty.waiter.viewmodel.repository.NewOrderRepository
 
@@ -41,11 +43,19 @@ class NewOrdersViewModel : ListOrderViewModel() {
 
 
     fun getOrderListData() = newOrderList
+
+    fun setOrdersList(orders : List<OrderDetails>) {
+        val recentOrders = orders.filter { orderDetails -> Utility.isCreatedToday(orderDetails.createdAt) }
+        newOrderList.value = recentOrders.filter { orderDetails -> Utility.hasOrderItems(orderDetails) }
+    }
+
     fun getOrderAdapter() = orderAdapter
 
     fun setSelectedOrderDetails(position: Int){
         selectedOrder.value =  newOrderList.value?.get(position)
     }
+
+    fun getSelectedOrderDetails() = selectedOrder
 
 
     fun getOrderId(position : Int) : MutableLiveData<String>{
@@ -55,14 +65,10 @@ class NewOrdersViewModel : ListOrderViewModel() {
     }
 
 
-    fun getWaiterDetails(position: Int): LiveData<String> {
-        if(position >= newOrderList.value?.size ?: 0) return waiterId
+    fun getWaiterDetails(position: Int): LiveData<String> = waiterId
 
-        else if (newOrderList.value.isNullOrEmpty()) {
-            return waiterId
-        }
-        waiterId.value = newOrderList.value?.get(position)?.waiter?.name
-        return waiterId
+    fun setWaiterId(id: String) {
+        waiterId.value = id
     }
 
     fun getTableId(position: Int): MutableLiveData<String> {

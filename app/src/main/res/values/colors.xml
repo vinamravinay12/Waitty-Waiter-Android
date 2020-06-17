@@ -29,4 +29,6 @@
     <color name ="colorBtnLogin">#E7E8EB</color>
     <color name="colorTxtLink">#007BF7</color>
     <color name ="colorBackgroundCheckbox">#F2F2F2</color>
+    <color name="colorOrderStatusPreparing">#FFBB00</color>
+    <color name="colorOrderStatusReady">#FF8080</color>
 </resources>

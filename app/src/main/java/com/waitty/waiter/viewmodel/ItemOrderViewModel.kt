@@ -2,12 +2,16 @@ package com.waitty.waiter.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.waitty.kitchen.adapter.OrderItemsAdapter
+import com.google.gson.JsonObject
 import com.waitty.waiter.R
+import com.waitty.waiter.adapter.OrderItemsAdapter
 import com.waitty.waiter.constant.constant
 import com.waitty.waiter.model.OrderDetails
+import com.waitty.waiter.model.WaittyAPIResponse
+import com.waitty.waiter.retrofit.API
+import com.waitty.waiter.retrofit.ApiClient
 import com.waitty.waiter.utility.Utility
+import com.waitty.waiter.viewmodel.repository.NewOrderRepository
 
 class ItemOrderViewModel : ListOrderViewModel() {
 
@@ -43,9 +47,11 @@ class ItemOrderViewModel : ListOrderViewModel() {
     }
 
     fun getWaiterDetails(): LiveData<String> {
-
-        waiterId.value = orderDetails.value?.waiter?.name ?: ""
         return waiterId
+    }
+
+    fun setWaiterId(id: String) {
+        waiterId.value = id
     }
 
     fun getTableId(): MutableLiveData<String> {
@@ -99,5 +105,26 @@ class ItemOrderViewModel : ListOrderViewModel() {
 
     override fun updateList() {
         orderDetails.value?.orderItems?.toMutableList()?.let { preparedItemsOrderAdapter?.updateList(it) }
+    }
+
+    fun acceptOrder(token : String) : MutableLiveData<WaittyAPIResponse> {
+        val repository = NewOrderRepository(ApiClient.getAPIInterface(),token)
+        val postData = JsonObject()
+        postData.addProperty(API.ORDER_ID,orderDetails.value?.id)
+        return repository.acceptOrder(postData,MutableLiveData())
+    }
+
+    fun checkOrderStatus(token : String) : MutableLiveData<WaittyAPIResponse> {
+        val repository = NewOrderRepository(ApiClient.getAPIInterface(),token)
+        val postData = JsonObject()
+        postData.addProperty(API.ORDER_ID,orderDetails.value?.id)
+        return repository.getOrderStatus(postData,MutableLiveData())
+    }
+
+    fun setOrderDelivered(token : String) : MutableLiveData<WaittyAPIResponse> {
+        val repository = NewOrderRepository(ApiClient.getAPIInterface(),token)
+        val postData = JsonObject()
+        postData.addProperty(API.ORDER_ID,orderDetails.value?.id)
+       return repository.deliverOrder(postData,MutableLiveData())
     }
 }

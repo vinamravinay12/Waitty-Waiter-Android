@@ -20,7 +20,7 @@
 
             app:tabSelectedTextColor="@color/colorTabItemTextSelected"
             app:tabTextColor="@color/colorTabItemText"
-            app:tabIndicatorColor="@color/colorTabItemTextSelected"
+            app:tabIndicatorColor="@color/colorYallow"
             app:tabIndicatorHeight="@dimen/_5sdp" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

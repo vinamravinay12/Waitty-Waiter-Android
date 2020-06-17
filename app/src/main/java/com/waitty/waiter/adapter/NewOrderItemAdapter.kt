@@ -1,10 +1,9 @@
-package com.waitty.kitchen.adapter
+package com.waitty.waiter.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import com.waitty.kitchen.adapter.viewholders.GenericOrderViewHolder
 import com.waitty.waiter.adapter.GenericOrderAdapter
 import com.waitty.waiter.model.OrderItem
 

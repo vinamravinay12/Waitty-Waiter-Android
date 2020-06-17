@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.translabtechnologies.visitormanagementsystem.vmshost.database.SharedPreferenceManager;
@@ -30,6 +31,8 @@ import com.waitty.waiter.appinterface.getResponseData;
 import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.model.CustomizationCategory;
 import com.waitty.waiter.model.DishData;
+import com.waitty.waiter.model.LoginUser;
+import com.waitty.waiter.model.OrderDetails;
 import com.waitty.waiter.retrofit.API;
 import com.waitty.waiter.retrofit.APICall;
 import com.waitty.waiter.retrofit.ApiClient;
@@ -41,6 +44,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -124,7 +128,7 @@ public class Utility {
     }
 
     // Show Toast
-    public static void ShowToast(Context context,String msg,int duration) {
+    public static void ShowToast(Context context, String msg, int duration) {
 
         int gravity = Gravity.CENTER; // the position of toast
         int xOffset = 0; // horizontal offset from current gravity
@@ -139,7 +143,7 @@ public class Utility {
     // Application logout function
     public static void LogOut(Context context) {
 
-        if(Utility.isNetworkAvailable(context))
+        if (Utility.isNetworkAvailable(context))
             logoutAPI(context);
 
         NotificationManager nMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -161,8 +165,8 @@ public class Utility {
     }
 
     // Call logout application API
-    public static void logoutAPI(Context context){
-        try{
+    public static void logoutAPI(Context context) {
+        try {
             ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
             Call<JsonElement> call = apiInterface.logoutApplication(Utility.getSharedPreferencesString(context, constant.USER_SECURITY_TOKEN));
             new APICall(context).Server_Interaction(call, new getResponseData() {
@@ -177,7 +181,7 @@ public class Utility {
                 }
             }, API.LOGOUT);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -193,14 +197,14 @@ public class Utility {
 
     // Check value null and return
     public static String checkNull(String value) {
-        return value==null?"":value;
+        return value == null ? "" : value;
     }
 
     // Check application version API
-    public static void CheckApplicationVersion(final Context context){
+    public static void CheckApplicationVersion(final Context context) {
 
-        try{
-            JsonObject jsonObject=new JsonObject();
+        try {
+            JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty(API.PLATFORM_TYPE, constant.DEVICE_TYPE);
             jsonObject.addProperty(API.USER_TYPE, "WAITER");
             jsonObject.addProperty(API.VERSION, context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode);
@@ -210,7 +214,7 @@ public class Utility {
             new APICall(context).Server_Interaction(call, new getResponseData() {
                 @Override
                 public void onSuccess(JSONObject OBJ, String msg, String typeAPI) {
-                 //   Dialog.showApplicationUpdateDialog(context,msg);
+                    //   Dialog.showApplicationUpdateDialog(context,msg);
                 }
 
                 @Override
@@ -219,7 +223,7 @@ public class Utility {
                 }
             }, API.APPVERSION);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -244,13 +248,15 @@ public class Utility {
         try {
             Date NewDate = dateFormaterServer.parse(date);
             return dateFormaterConvert.format(NewDate);
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 
     // UTC to local date
-    public static String chageUTC_ToLocalDate(SimpleDateFormat dateFormaterServer,String date,SimpleDateFormat dateFormaterConvert){
-        String returnValue ="";
+    public static String chageUTC_ToLocalDate(SimpleDateFormat dateFormaterServer, String date, SimpleDateFormat dateFormaterConvert) {
+        String returnValue = "";
         try {
 
             if (date == null || date.isEmpty())
@@ -270,21 +276,21 @@ public class Utility {
     }
 
     // Open url
-    public static void openURL(Context ctx,String url){
+    public static void openURL(Context ctx, String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         ctx.startActivity(browserIntent);
     }
 
     // Get dish total price
     public static double getDishTotalPrice(DishData dishData) {
-        double totalAmount=dishData.getPrice();
+        double totalAmount = dishData.getPrice();
 
-        if(dishData.getCustomizationCategories()!=null && dishData.getCustomizationCategories().size()>0) {
-            for(int j=0;j<dishData.getCustomizationCategories().size();j++){
-                CustomizationCategory categoryData=dishData.getCustomizationCategories().get(j);
-                if(categoryData.getCustomizationCategoryOptions()!=null && categoryData.getCustomizationCategoryOptions().size()>0){
-                    for(int k=0;k<categoryData.getCustomizationCategoryOptions().size();k++){
-                        if(!categoryData.getCustomizationCategoryOptions().get(k).getIsSoldout() && categoryData.getCustomizationCategoryOptions().get(k).getIsDefault()) {
+        if (dishData.getCustomizationCategories() != null && dishData.getCustomizationCategories().size() > 0) {
+            for (int j = 0; j < dishData.getCustomizationCategories().size(); j++) {
+                CustomizationCategory categoryData = dishData.getCustomizationCategories().get(j);
+                if (categoryData.getCustomizationCategoryOptions() != null && categoryData.getCustomizationCategoryOptions().size() > 0) {
+                    for (int k = 0; k < categoryData.getCustomizationCategoryOptions().size(); k++) {
+                        if (!categoryData.getCustomizationCategoryOptions().get(k).getIsSoldout() && categoryData.getCustomizationCategoryOptions().get(k).getIsDefault()) {
                             totalAmount = totalAmount + categoryData.getCustomizationCategoryOptions().get(k).getPrice();
                         }// check conditions
                     }// option for loop
@@ -297,14 +303,14 @@ public class Utility {
 
     // Get dish total selling price
     public static double getDishTotalSellingPrice(DishData dishData) {
-        double totalAmount=dishData.getSellingPrice();
+        double totalAmount = dishData.getSellingPrice();
 
-        if(dishData.getCustomizationCategories()!=null && dishData.getCustomizationCategories().size()>0) {
-            for(int j=0;j<dishData.getCustomizationCategories().size();j++){
-                CustomizationCategory categoryData=dishData.getCustomizationCategories().get(j);
-                if(categoryData.getCustomizationCategoryOptions()!=null && categoryData.getCustomizationCategoryOptions().size()>0){
-                    for(int k=0;k<categoryData.getCustomizationCategoryOptions().size();k++){
-                        if(!categoryData.getCustomizationCategoryOptions().get(k).getIsSoldout() && categoryData.getCustomizationCategoryOptions().get(k).getIsDefault()) {
+        if (dishData.getCustomizationCategories() != null && dishData.getCustomizationCategories().size() > 0) {
+            for (int j = 0; j < dishData.getCustomizationCategories().size(); j++) {
+                CustomizationCategory categoryData = dishData.getCustomizationCategories().get(j);
+                if (categoryData.getCustomizationCategoryOptions() != null && categoryData.getCustomizationCategoryOptions().size() > 0) {
+                    for (int k = 0; k < categoryData.getCustomizationCategoryOptions().size(); k++) {
+                        if (!categoryData.getCustomizationCategoryOptions().get(k).getIsSoldout() && categoryData.getCustomizationCategoryOptions().get(k).getIsDefault()) {
                             totalAmount = totalAmount + categoryData.getCustomizationCategoryOptions().get(k).getSellingPrice();
                         }// check conditions
                     }// option for loop
@@ -342,16 +348,19 @@ public class Utility {
     }
 
     public static String getToken(Context context) {
-        return new SharedPreferenceManager(context,constant.LOGIN_SP).getStringPreference(API.AUTHORIZATION);
+        return new SharedPreferenceManager(context, constant.LOGIN_SP).getStringPreference(API.AUTHORIZATION);
     }
 
 
     public static String getMessageOnErrorCode(@Nullable Integer errorCode, Context context) {
         switch (errorCode) {
-         //   case API.NETWORK_ERROR : return context.getString(R.string.network_not_found);
-            case API.BLOCK_ADMIN : return context.getString(R.string.block_admin_msg);
-            case API.SESSION_EXPIRE : return context.getString(R.string.session_expire_msg);
-            default: return context.getString(R.string.something_went_wrong);
+          //     case API.NETWORK_ERROR : return context.getString(R.string.network_not_found);
+            case API.BLOCK_ADMIN:
+                return context.getString(R.string.block_admin_msg);
+            case API.SESSION_EXPIRE:
+                return context.getString(R.string.session_expire_msg);
+            default:
+                return context.getString(R.string.something_went_wrong);
         }
 
     }
@@ -362,5 +371,32 @@ public class Utility {
         return simpleDateFormat.format(arrivalDate);
     }
 
+    public static boolean isCreatedToday(@Nullable String createdAt) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(constant.DATE_FORMAT);
+        String formattedCreatedAt = chageUTC_ToLocalDate(constant.dateFormaterServer, createdAt, simpleDateFormat);
+        String currentDate = simpleDateFormat.format(Calendar.getInstance().getTime());
+
+
+        try {
+            Date createdAtDate = simpleDateFormat.parse(formattedCreatedAt);
+            Date today = simpleDateFormat.parse(currentDate);
+            return Math.abs(today.getTime() - createdAtDate.getTime()) < 1000*60*60*24;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public static boolean hasOrderItems(OrderDetails orderDetails) {
+        return !orderDetails.getOrderItems().isEmpty();
+    }
+
+
+    public static String getWaiterName(Context context) {
+       String userJson =  new SharedPreferenceManager(context,constant.LOGIN_SP).getStringPreference(API.WAITER_USER);
+       LoginUser waiterUser = new Gson().fromJson(userJson,LoginUser.class);
+       return waiterUser.getName();
+    }
 }// final class ends here
 

@@ -1,6 +1,5 @@
-package com.waitty.kitchen.adapter.viewholders
+package com.waitty.waiter.adapter.viewholders
 
-import com.waitty.kitchen.adapter.viewholders.GenericOrderViewHolder
 import com.waitty.waiter.databinding.LayoutOrderItemCustomizationHeaderBinding
 
 

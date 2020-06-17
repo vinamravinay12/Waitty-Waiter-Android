@@ -1,4 +1,4 @@
-package com.waitty.kitchen.adapter.viewholders
+package com.waitty.waiter.adapter.viewholders
 
 import android.content.res.ColorStateList
 import android.view.MotionEvent

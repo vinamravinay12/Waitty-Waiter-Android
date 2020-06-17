@@ -14,6 +14,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         tools:context=".fragment.NewOrderDetailsFragment">
 
         <androidx.core.widget.NestedScrollView
@@ -27,7 +28,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 app:cardCornerRadius="@dimen/_10dp"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardElevation="@dimen/_5dp">
+                app:cardElevation="@dimen/_5dp"
+                android:id="@+id/card_orderDetails">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -237,8 +239,32 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvTaxTotal"
                         tools:text="Total  892.5" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAccept"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/shape_btn_accept"
+            android:backgroundTint="@color/colorBtnStartPreparingGreen"
+            android:text="@string/txt_accept"
+            android:fontFamily="@font/bwnistageo_bold"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:gravity="center"/>
+
+
+        <include layout="@layout/layout_custom_loading"
+            android:id="@+id/layoutLoader"
+            tools:visibility="gone"/>
+
+        <include layout="@layout/layout_connection_error"
+            tools:visibility="gone"
+            android:id="@+id/layoutError"/>
     </FrameLayout>
 </layout>

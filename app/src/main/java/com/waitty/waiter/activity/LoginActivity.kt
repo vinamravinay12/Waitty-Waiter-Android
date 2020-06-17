@@ -34,6 +34,7 @@ import com.waitty.waiter.viewmodel.ApiErrorViewModel
 import com.waitty.waiter.viewmodel.ClickType
 import com.waitty.waiter.viewmodel.LoginViewModel
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.ViewModelProvider
 
 class LoginActivity : AppCompatActivity(), WKClickListener {
     private lateinit var activityLoginBinding: ActivityLoginBinding
@@ -47,8 +48,20 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        initializeViewModels()
-        initializeListeners()
+        if(!alreadyLoggedIn()) {
+            initializeViewModels()
+            initializeListeners()
+        }
+
+    }
+
+    private fun alreadyLoggedIn(): Boolean {
+        val sharedPreferenceManager = SharedPreferenceManager(this,constant.LOGIN_SP)
+        if(sharedPreferenceManager.getBooleanPreference(constant.KEY_IS_LOGGED_IN,false)) {
+            launchHomeActivity()
+            return true
+        }
+        return false
     }
 
     private fun initializeListeners() {
@@ -64,7 +77,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 //            bindingLoginFragment.txtInputPasswordLayout?.let { it1 -> setErrorProperties(it1,bindingLoginFragment.etPassword,!isValidated) }
 //        }
 
-      //  activityLoginBinding.etWaiterId.setOnFocusChangeListener()
+        //  activityLoginBinding.etWaiterId.setOnFocusChangeListener()
         activityLoginBinding.btnLogin.setOnClickListener { onClick(ClickType.Login) }
         activityLoginBinding.tvForgotPassword.setOnClickListener { onClick(ClickType.ForgotPassword) }
     }
@@ -72,6 +85,11 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 
     // Variable initialization
     private fun initializeViewModels() {
+        val viewModelProvider = ViewModelProvider(this)
+
+        loginViewModel = viewModelProvider.get(LoginViewModel::class.java)
+        apiErrorViewModel = viewModelProvider.get(ApiErrorViewModel::class.java)
+
         activityLoginBinding.let { FragmentUtils.setBindingVariables(hashMapOf(BR.LoginVM to loginViewModel, BR.clickEvent to this), it) }
         activityLoginBinding.layoutLoader.apiErrorVM = apiErrorViewModel
         activityLoginBinding.layoutError.apiErrorVM = apiErrorViewModel
@@ -81,7 +99,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
     }
 
     private fun setErrorProperties(textInputLayout: TextInputLayout, textInputEditText: TextInputEditText, isError: Boolean) {
-        setHintColor(textInputLayout,isError)
+        setHintColor(textInputLayout, isError)
         textInputLayout.endIconDrawable = getEndIcon(isError)
         textInputLayout.isEndIconVisible = true
 
@@ -95,9 +113,9 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
         view.boxStrokeColor = getBoxStrokeColor(isError) ?: R.color.colorWaiterIdText
     }
 
-    private fun getEndIcon(isError: Boolean) : Drawable? {
+    private fun getEndIcon(isError: Boolean): Drawable? {
         return this.let { context ->
-            if(isError) AppCompatResources.getDrawable(context,R.drawable.ic_error_red_24dp) else AppCompatResources.getDrawable(context,R.drawable.ic_done_tick_green_24dp)
+            if (isError) AppCompatResources.getDrawable(context, R.drawable.ic_error_red_24dp) else AppCompatResources.getDrawable(context, R.drawable.ic_done_tick_green_24dp)
 
         }
     }
@@ -118,13 +136,13 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 
     private fun loginUser() {
         val isValidated = loginViewModel.validateUserName() ?: false
-        setErrorProperties( activityLoginBinding.txtInputPasswordLayout, activityLoginBinding.etWaiterId,!isValidated)
+        setErrorProperties(activityLoginBinding.txtInputPasswordLayout, activityLoginBinding.etWaiterId, !isValidated)
 
         val isPasswordValidated = loginViewModel.validatePassword() ?: false
-        setErrorProperties(activityLoginBinding.txtInputPasswordLayout,activityLoginBinding.etPassword,!isPasswordValidated)
+        setErrorProperties(activityLoginBinding.txtInputPasswordLayout, activityLoginBinding.etPassword, !isPasswordValidated)
 
 
-        FragmentUtils.hideKeyboard(activityLoginBinding.root,this)
+        FragmentUtils.hideKeyboard(activityLoginBinding.root, this)
         val deviceId = this.let { context -> SharedPreferenceManager(context, constant.LOGIN_SP).getStringPreference(constant.USER_DEVICEID) }
 
         val fcmToken = this.let { context -> SharedPreferenceManager(context, constant.LOGIN_SP).getStringPreference(constant.USER_FCMTOKENID) }
@@ -137,10 +155,11 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
                     when (response.status) {
                         APIStatus.LOADING -> FragmentUtils.showProgress(parentView = activityLoginBinding.viewLogin, toShow = true, apiErrorViewModel = apiErrorViewModel, progressMessage = getString(R.string.wait), isSwipeRefreshed = false)
 
-                        APIStatus.ERROR ->  showError(true,errorCode = response.errorCode ?: 405, errorMessage = Utility.getMessageOnErrorCode(response.errorCode, this))
+                        APIStatus.ERROR -> showError(true, errorCode = response.errorCode
+                                ?: 405, errorMessage = if (!response.message.isNullOrEmpty()) response.message else Utility.getMessageOnErrorCode(response.errorCode, this))
 
                         APIStatus.SUCCESS -> {
-                            if (response.data == null) showError(false,404,"")
+                            if (response.data == null) showError(false, 404, "")
                             else {
                                 activityLoginBinding.viewLogin.visibility = View.VISIBLE
                                 apiErrorViewModel?.resetValues()
@@ -154,7 +173,6 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
         }
 
 
-
     }
 
     private fun handleLoginResponse(response: Any) {
@@ -163,6 +181,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
         (response as? LoginResponse).let { loginResponse ->
             sharedPreferenceManager.storeStringPreference(API.AUTHORIZATION, loginResponse?.token
                     ?: "")
+            sharedPreferenceManager.storeComplexObjectPreference(API.WAITER_USER,loginResponse?.data)
         }
         sharedPreferenceManager.storeBooleanPreference(constant.KEY_IS_LOGGED_IN, true)
         launchHomeActivity()
@@ -170,9 +189,8 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
     }
 
     private fun launchHomeActivity() {
-        Utility.ShowToast(this,getString(R.string.login_success), Toast.LENGTH_LONG)
-        //  startActivity(Intent(activity,HomeActivityNew::class.java))
-        //activity?.finish()
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 
     override fun onClick(clickType: ClickType) {
@@ -196,7 +214,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 
     fun showError(toShow: Boolean, errorCode: Int, errorMessage: String?) {
 
-        if (toShow) apiErrorViewModel.let { FragmentUtils.showError( it, errorCode, errorMessage, true) } else apiErrorViewModel?.resetValues()
+        if (toShow) apiErrorViewModel.let { FragmentUtils.showError(it, errorCode, errorMessage, true) } else apiErrorViewModel?.resetValues()
         activityLoginBinding.viewLogin.visibility = if (toShow) View.GONE else View.VISIBLE
         if (toShow) {
             Handler().postDelayed({ showError(false, errorCode, "") }, 3000)

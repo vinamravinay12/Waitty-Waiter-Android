@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.viewpager.widget.ViewPager
@@ -98,6 +99,11 @@ object BindingUtils {
     @BindingAdapter(value = ["onKeyAction", "itemPosition"],requireAll = true)
     @JvmStatic fun setKeyChangeListener(editText: EditText, keyItemActionListener: KeyItemActionListener, position : Int) {
         editText.setOnEditorActionListener(EditTextEditorActionHandler(keyItemActionListener,position,editText.text.toString()))
+    }
+
+    @BindingAdapter("viewBackgroundColor")
+    @JvmStatic fun setViewBackground(view: View, color : Int) {
+        view.setBackgroundColor(ContextCompat.getColor(view.context,color))
     }
 
 

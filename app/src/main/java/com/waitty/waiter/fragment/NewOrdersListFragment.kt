@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.waitty.kitchen.fragment.FragmentUtils
 import com.waitty.waiter.R
+import com.waitty.waiter.constant.constant
 import com.waitty.waiter.databinding.FragmentNewOrdersListBinding
 import com.waitty.waiter.databinding.FragmentNeworderListBinding
 import com.waitty.waiter.model.APIStatus
@@ -53,22 +54,32 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         super.onActivityCreated(savedInstanceState)
-
+        viewModel?.setWaiterId(Utility.getWaiterName(context))
+        apiErrorViewModel?.resetValues()
         bindingNewOrdersListFragment.layoutError.apiErrorVM = apiErrorViewModel
-        bindingNewOrdersListFragment.rvNewOrders.layoutManager = if(!Utility.isTablet(context)) LinearLayoutManager(context)
-        else GridLayoutManager(context,2)
+        bindingNewOrdersListFragment.rvNewOrders.layoutManager = LinearLayoutManager(context)
 
         bindingNewOrdersListFragment.rvNewOrders.setHasFixedSize(true)
         bindingNewOrdersListFragment.rvNewOrders.adapter = viewModel?.getOrderAdapter()
+        viewModel?.getOrderAdapter()?.setVariablesMap(getVariablesMap())
+
         bindingNewOrdersListFragment.rvNewOrders.addOnScrollListener(RecyclerViewScrollListener())
         scheduleAlarm()
 
 
     }
 
+    private fun getVariablesMap(): HashMap<Int, Any?> {
+        return hashMapOf(BR.newOrdersVM to viewModel, BR.itemClickEvent to this)
+    }
+
 
     override fun onResume() {
         super.onResume()
+        if(homeFragment == null) homeFragment = (parentFragment as? HomeFragment)
+        homeFragment?.setPageTitle()
+        homeFragment?.hideBackButton()
+        showNoInvite(viewModel?.getOrderListData()?.value.isNullOrEmpty())
         FragmentUtils.hideKeyboard(bindingNewOrdersListFragment.root,context)
         refreshNewOrdersList()
     }
@@ -76,16 +87,8 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
 
     override fun onItemClick(position: Int) {
         viewModel?.setSelectedOrderDetails(position)
-//        viewModel?.updateOrderPreparationStatus(Utility.getToken(context))?.observe(viewLifecycleOwner, Observer { response ->
-//            when(response.status) {
-//                APIStatus.LOADING -> homeFragment?.showProgress(true)
-//                APIStatus.ERROR -> showError(true,response.errorCode ?: 404, response.message)
-//                APIStatus.SUCCESS ->  {
-//                    showError(false,404,"")
-//                    refreshNewOrdersList()
-//                }
-//            }
-//        })
+        FragmentUtils.launchFragment(activity?.supportFragmentManager,R.id.nav_host_fragment,NewOrderDetailsFragment(), constant.TAG_NEW_ORDER_DETAILS)
+
 
     }
 
@@ -96,7 +99,7 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
 
         viewModel?.fetchNewOrders(Utility.getToken(context))?.observe(viewLifecycleOwner, Observer { response ->
 
-            when(response.status) {
+             when(response.status) {
                 APIStatus.LOADING -> homeFragment?.showProgress(true)
                 APIStatus.ERROR -> showError(true,response.errorCode ?: 404,Utility.getMessageOnErrorCode(response.errorCode,context))
                 APIStatus.SUCCESS -> handleOrdersFetched(response.data,previousListCount)
@@ -105,7 +108,7 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
     }
 
     private fun handleOrdersFetched(data: Any?, previousListCount: Int) {
-        viewModel?.getOrderListData()?.value = (data as? OrderResponse)?.data
+        viewModel?.setOrdersList((data as? OrderResponse)?.data ?: ArrayList())
         showError(false,404,"")
         showNoInvite(viewModel?.getOrderListData()?.value?.size ?:0 == 0)
         if(previousListCount != viewModel?.getOrderListData()?.value?.size ?: 0 && viewModel?.getOrderListData()?.value?.size ?: 0 > 0) showNewInviteIndicator()

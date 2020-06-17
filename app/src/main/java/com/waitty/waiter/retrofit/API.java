@@ -1,5 +1,7 @@
 package com.waitty.waiter.retrofit;
 
+import org.jetbrains.annotations.NotNull;
+
 public class API {
     public static final int OTHER_FAILED = 422;
     public static final int SESSION_EXPIRE = 401;
@@ -54,5 +56,5 @@ public class API {
     public static final String PROFILE_IMAGE = "profile_image";
     public static final String KITCHEN_ID = "key";
     public static final String RESTAURANT = "restaurant";
-
+    public static final String WAITER_USER = "WaiteUser";
 }

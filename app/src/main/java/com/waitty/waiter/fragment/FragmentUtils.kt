@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.waitty.waiter.activity.HomeActivity
 
 import com.waitty.waiter.viewmodel.ApiErrorViewModel
 
@@ -20,17 +21,17 @@ object FragmentUtils {
             return
         }
         val fragmentTransaction = if (fragmentManager.fragments.size == 0) addFragment(fragmentManager,view, fragment, tag) else replaceFragment(fragmentManager, view, fragment, tag)
-        fragmentTransaction.commit()
+        fragmentTransaction?.commit()
     }
 
-    private fun addFragment(fragmentManager: FragmentManager, view : Int, fragment: Fragment?, tag: String?): FragmentTransaction {
-        return fragmentManager.beginTransaction().add(view, fragment!!, tag)
+    private fun addFragment(fragmentManager: FragmentManager, view : Int, fragment: Fragment?, tag: String?): FragmentTransaction? {
+        return fragment?.let { fragmentManager.beginTransaction().add(view, it, tag) }
     }
 
 
 
-    private fun replaceFragment(fragmentManager: FragmentManager, view : Int, fragment: Fragment?, tag: String?): FragmentTransaction {
-        return fragmentManager.beginTransaction().replace(view, fragment!!, tag).addToBackStack(null)
+    private fun replaceFragment(fragmentManager: FragmentManager, view : Int, fragment: Fragment?, tag: String?): FragmentTransaction? {
+        return fragment?.let { fragmentManager.beginTransaction().replace(view, it, tag).addToBackStack(null) }
     }
 
     fun goBackToPreviousScreen(activity: FragmentActivity?, previousFragmentTag: String?, currentFragmentTag: String?) {
@@ -102,6 +103,10 @@ object FragmentUtils {
 
     private fun getVisibility(toShow : Boolean)  : Int {
         return if(toShow) View.VISIBLE else View.GONE
+    }
+
+    fun hideBottomNavigationView(activity: FragmentActivity?, toHide : Boolean) {
+        (activity as? HomeActivity)?.hideBottomNavigationMenu(toHide)
     }
 
 //    fun setTitle(activity : FragmentActivity?,title : Int) {

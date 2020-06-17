@@ -3,10 +3,10 @@ package com.waitty.waiter.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.waitty.kitchen.adapter.viewholders.GenericOrderViewHolder
-import com.waitty.kitchen.adapter.viewholders.OrderItemCustomizationOptionTypeViewHolder
-import com.waitty.kitchen.adapter.viewholders.OrderItemCustomizationOptionViewHolder
 import com.waitty.waiter.R
+import com.waitty.waiter.adapter.viewholders.GenericOrderViewHolder
+import com.waitty.waiter.adapter.viewholders.OrderItemCustomizationOptionTypeViewHolder
+import com.waitty.waiter.adapter.viewholders.OrderItemCustomizationOptionViewHolder
 import com.waitty.waiter.databinding.LayoutOrderItemCustomizationHeaderBinding
 import com.waitty.waiter.databinding.LayoutTextItemCustomizationBinding
 import java.util.*

@@ -1,16 +1,25 @@
 package com.waitty.waiter.utility;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+
+import androidx.databinding.DataBindingUtil;
+
+import com.waitty.waiter.R;
+import com.waitty.waiter.databinding.DialogLogoutBinding;
 
 public class Dialog {
 
     private static AlertDialog dialogLogout,dialogPermission;
 
     // Application logout dialog
-   /* public static void showLogoutDialog(final Context context) {
+    public static void showLogoutDialog(final Context context) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-     //   DialogLogoutBinding dialogLogoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_logout, null, false);
+        DialogLogoutBinding dialogLogoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_logout, null, false);
         builder.setView(dialogLogoutBinding.getRoot());
 
         dialogLogout = builder.create();
@@ -37,7 +46,7 @@ public class Dialog {
     }
 
     // Show dialog alert for token expire and block by admin
-    public static void showAdminBlockTokenExpireDialog(final Context context, String head, String msg) {
+   /* public static void showAdminBlockTokenExpireDialog(final Context context, String head, String msg) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         DialogLogoutBinding dialogLogoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_logout, null, false);

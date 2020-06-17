@@ -2,9 +2,7 @@ package com.waitty.waiter.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.waitty.waiter.fragment.NewOrderListFragment
-import com.waitty.waiter.fragment.ProcessingOrderListFragment
-import com.waitty.waiter.fragment.ServedOrderListFragment
+import com.waitty.waiter.fragment.*
 import java.lang.ref.WeakReference
 
 class OrderPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -17,17 +15,17 @@ class OrderPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         when (position) {
             0 -> {
-                val newOrderDetailsListFragment: Fragment = NewOrderListFragment()
+                val newOrderDetailsListFragment: Fragment = NewOrdersListFragment()
                 currentFragmentWeakReference = WeakReference(newOrderDetailsListFragment)
                 return newOrderDetailsListFragment
             }
             1-> {
-                val preparingOrderListFragment: Fragment = ProcessingOrderListFragment()
+                val preparingOrderListFragment: Fragment = ProcessingOrdersListFragment()
                 currentFragmentWeakReference = WeakReference(preparingOrderListFragment)
                 return preparingOrderListFragment
             }
             2 -> {
-                val preparedOrdersFragment: Fragment = ServedOrderListFragment()
+                val preparedOrdersFragment: Fragment = ServedOrdersListFragment()
                 currentFragmentWeakReference = WeakReference(preparedOrdersFragment)
                 return preparedOrdersFragment
             }

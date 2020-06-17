@@ -3,8 +3,8 @@ package com.waitty.waiter.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.waitty.kitchen.adapter.viewholders.GenericOrderViewHolder
-import com.waitty.kitchen.adapter.viewholders.NewOrderViewHolder
+import com.waitty.waiter.adapter.viewholders.GenericOrderViewHolder
+import com.waitty.waiter.adapter.viewholders.NewOrderViewHolder
 import com.waitty.waiter.databinding.LayoutItemOrderNewBinding
 
 import com.waitty.waiter.model.OrderDetails

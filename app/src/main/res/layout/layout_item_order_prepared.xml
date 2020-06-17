@@ -5,7 +5,7 @@
     <data>
         <variable
             name="preparedOrdersVM"
-            type="com.waitty.waiter.viewmodel.PreparedOrdersViewModel" />
+            type="com.waitty.waiter.viewmodel.ServedOrdersListViewModel" />
 
         <variable
             name="position"

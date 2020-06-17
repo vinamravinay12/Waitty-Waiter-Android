@@ -58,4 +58,7 @@ public class constant {
     public static final String KEY_PREPARED_ORDERS = "PreparedOrders";
     public static final String DISPLAY_DATE_TIME_FORMAT = "dd/MM/yyyy hh:mm a";
     public static final String TAG_NEW_ORDER_DETAILS=  "NewOrderDetailsFragment";
+    public static final String TAG_PROCESSING_ORDER_DETAILS = "ProcessingOrderDetailsFragment";
+    public static final String TAG_SERVED_ORDER_DETAILS ="ServedOrderDetailsFragment";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }

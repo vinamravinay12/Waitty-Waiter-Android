@@ -1,9 +1,9 @@
 package com.waitty.waiter.adapter
 
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import com.waitty.kitchen.adapter.viewholders.GenericOrderViewHolder
+import com.waitty.waiter.adapter.viewholders.GenericOrderViewHolder
+
 
 abstract class GenericOrderAdapter<T>(private var dataList: MutableList<T>?)
     : RecyclerView.Adapter<GenericOrderViewHolder<T>>() {

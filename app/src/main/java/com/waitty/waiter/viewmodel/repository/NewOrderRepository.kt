@@ -29,7 +29,7 @@ interface OrderRepository {
 class NewOrderRepository(private val apiInterface: ApiInterface, private val token: String) {
 
 
-    private fun rejectOrder(postData: JsonObject, responseData: MutableLiveData<WaittyAPIResponse>): MutableLiveData<WaittyAPIResponse> {
+     fun rejectOrder(postData: JsonObject, responseData: MutableLiveData<WaittyAPIResponse>): MutableLiveData<WaittyAPIResponse> {
 
         var waittyAPIResponse = WaittyAPIResponse(null, APIStatus.LOADING, null, null)
 
@@ -57,7 +57,7 @@ class NewOrderRepository(private val apiInterface: ApiInterface, private val tok
         return responseData
     }
 
-    private fun acceptOrder(postData: JsonObject, responseData: MutableLiveData<WaittyAPIResponse>): MutableLiveData<WaittyAPIResponse> {
+     fun acceptOrder(postData: JsonObject, responseData: MutableLiveData<WaittyAPIResponse>): MutableLiveData<WaittyAPIResponse> {
         var waittyAPIResponse = WaittyAPIResponse(null, APIStatus.LOADING, null, null)
 
         apiInterface.acceptOrder(postData, token).enqueue(object : Callback<JsonElement> {

@@ -9,8 +9,8 @@ import android.text.style.BulletSpan
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.waitty.kitchen.adapter.OrderItemCustomizationOptionsAdapter
-import com.waitty.kitchen.model.OrderItem
+import com.waitty.waiter.model.OrderItem
+
 import java.util.*
 import kotlin.collections.ArrayList
 

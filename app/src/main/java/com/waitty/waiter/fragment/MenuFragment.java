@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.waitty.waiter.R;
 import com.waitty.waiter.adapter.PagerAdapterSubmenu;
 import com.waitty.waiter.databinding.FragmentMenuBinding;
 import com.waitty.waiter.model.SubCategory;
@@ -36,7 +38,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-       // fragmentMenuBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false);
+        fragmentMenuBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false);
         root = (ViewGroup) fragmentMenuBinding.getRoot();
         mContext = getContext();
 
