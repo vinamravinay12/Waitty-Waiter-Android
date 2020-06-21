@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 //            bindingLoginFragment.txtInputPasswordLayout?.let { it1 -> setErrorProperties(it1,bindingLoginFragment.etPassword,!isValidated) }
 //        }
 
-        //  activityLoginBinding.etWaiterId.setOnFocusChangeListener()
+         // activityLoginBinding.etWaiterId.setOnFocusChangeListener()
         activityLoginBinding.btnLogin.setOnClickListener { onClick(ClickType.Login) }
         activityLoginBinding.tvForgotPassword.setOnClickListener { onClick(ClickType.ForgotPassword) }
     }
@@ -143,9 +143,9 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
 
 
         FragmentUtils.hideKeyboard(activityLoginBinding.root, this)
-        val deviceId = this.let { context -> SharedPreferenceManager(context, constant.LOGIN_SP).getStringPreference(constant.USER_DEVICEID) }
+        val deviceId = this.let { context -> SharedPreferenceManager(context, constant.NOTIFICATION_SP).getStringPreference(constant.USER_DEVICEID) }
 
-        val fcmToken = this.let { context -> SharedPreferenceManager(context, constant.LOGIN_SP).getStringPreference(constant.USER_FCMTOKENID) }
+        val fcmToken = this.let { context -> SharedPreferenceManager(context, constant.NOTIFICATION_SP).getStringPreference(constant.USER_FCMTOKENID) }
 
 
 
@@ -220,6 +220,7 @@ class LoginActivity : AppCompatActivity(), WKClickListener {
             Handler().postDelayed({ showError(false, errorCode, "") }, 3000)
         }
 
+        activityLoginBinding.txtInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
 
     }
 

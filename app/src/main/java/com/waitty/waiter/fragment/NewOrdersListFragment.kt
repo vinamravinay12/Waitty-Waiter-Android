@@ -54,7 +54,6 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         super.onActivityCreated(savedInstanceState)
-        viewModel?.setWaiterId(Utility.getWaiterName(context))
         apiErrorViewModel?.resetValues()
         bindingNewOrdersListFragment.layoutError.apiErrorVM = apiErrorViewModel
         bindingNewOrdersListFragment.rvNewOrders.layoutManager = LinearLayoutManager(context)
@@ -73,6 +72,11 @@ class NewOrdersListFragment : Fragment(),WKItemClickListener {
         return hashMapOf(BR.newOrdersVM to viewModel, BR.itemClickEvent to this)
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        showNoInvite(viewModel?.getOrderListData()?.value?.size ?: 0 == 0)
+    }
 
     override fun onResume() {
         super.onResume()

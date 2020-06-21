@@ -135,19 +135,19 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     fun refreshNewOrdersList() {
-        val fragment = childFragmentManager.fragments[0]
-        if (fragment is NewOrdersListFragment) {
-            (fragment as? NewOrdersListFragment)?.refreshNewOrdersList()
-        }
+//        val fragment = childFragmentManager.fragments[0]
+//        if (fragment is NewOrdersListFragment) {
+//            (fragment as? NewOrdersListFragment)?.refreshNewOrdersList()
+//        }
     }
 
 
     fun refreshProcessingOrdersList() {
 
-        val fragment = childFragmentManager.fragments[1]
-        if (fragment is ProcessingOrdersListFragment) {
-            (fragment as? ProcessingOrdersListFragment)?.refreshProcessingOrdersList()
-        }
+//        val fragment = childFragmentManager.fragments[1]
+//        if (fragment is ProcessingOrdersListFragment) {
+//            (fragment as? ProcessingOrdersListFragment)?.refreshProcessingOrdersList()
+//        }
     }
 
 

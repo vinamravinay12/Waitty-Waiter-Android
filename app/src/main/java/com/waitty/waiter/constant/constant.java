@@ -61,4 +61,9 @@ public class constant {
     public static final String TAG_PROCESSING_ORDER_DETAILS = "ProcessingOrderDetailsFragment";
     public static final String TAG_SERVED_ORDER_DETAILS ="ServedOrderDetailsFragment";
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String TAG_SEARCH = "SearchOrdersFragment" ;
+    public static final String TAG_SEARCH_ORDERS_DETAILS = "SearchOrderDetailsFragment";
+
+    public static final String NOTIFICATION_SP = "NotificationSP";
+    public static final String NOTIFICATION_CHANNEL_GROUP_ID = "WaittyWaiterChannelGroup";
 }

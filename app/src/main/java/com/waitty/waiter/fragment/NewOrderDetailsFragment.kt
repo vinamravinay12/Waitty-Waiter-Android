@@ -64,7 +64,6 @@ class NewOrderDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         itemOrdersViewModel?.setRupeeSymbol(getString(R.string.rupee_symbol))
-        itemOrdersViewModel?.setWaiterId(Utility.getWaiterName(context))
         setupRecyclerView()
         setPageDetails()
         showBackButton()

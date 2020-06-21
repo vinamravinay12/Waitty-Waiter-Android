@@ -71,12 +71,16 @@ class ProcessingOrdersListFragment : Fragment(),WKItemClickListener {
     }
 
 
-
+    override fun onStart() {
+        super.onStart()
+        showNoInvite(viewModel?.getOrderListData()?.value?.size ?: 0 == 0)
+    }
     override fun onResume() {
         super.onResume()
         if(homeFragment == null) homeFragment = (parentFragment as? HomeFragment)
         homeFragment?.setPageTitle()
         homeFragment?.hideBackButton()
+
         FragmentUtils.hideKeyboard(bindingProcessingOrdersListFragment.root,context)
         refreshProcessingOrdersList()
     }

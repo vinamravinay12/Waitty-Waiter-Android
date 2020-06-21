@@ -28,7 +28,7 @@ class NewOrdersViewModel : ListOrderViewModel() {
     private val orderId = MutableLiveData<String>()
     private val tableId: MutableLiveData<String> = MutableLiveData()
     private val orderType: MutableLiveData<String> = MutableLiveData()
-    private val waiterId: MutableLiveData<String> = MutableLiveData()
+    private val userName: MutableLiveData<String> = MutableLiveData()
     private val tableIdPrefix: MutableLiveData<String> = MutableLiveData("T")
     private var orderAdapter: GenericOrderAdapter<OrderDetails>? = null
     private val totalOrderItems = MutableLiveData<String>()
@@ -65,11 +65,12 @@ class NewOrdersViewModel : ListOrderViewModel() {
     }
 
 
-    fun getWaiterDetails(position: Int): LiveData<String> = waiterId
-
-    fun setWaiterId(id: String) {
-        waiterId.value = id
+    fun getUserName(position: Int): LiveData<String> {
+        if (position >= newOrderList.value?.size ?: 0) return userName
+        userName.value = newOrderList.value?.get(position)?.user?.name ?: ""
+        return userName
     }
+
 
     fun getTableId(position: Int): MutableLiveData<String> {
         if (newOrderList.value.isNullOrEmpty() || newOrderList.value?.get(position)?.table == null) return tableId

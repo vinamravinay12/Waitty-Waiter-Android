@@ -63,7 +63,6 @@ class ProcessingOrderDetailsFragment :  Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         itemOrdersViewModel?.setRupeeSymbol(getString(R.string.rupee_symbol))
-        itemOrdersViewModel?.setWaiterId(Utility.getWaiterName(context))
         setupRecyclerView()
        checkForOrderStatus()
         FragmentUtils.hideKeyboard(bindingProcessingOrderDetails.rvOrderItems,context)
@@ -193,6 +192,7 @@ class ProcessingOrderDetailsFragment :  Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Served", R.drawable.ic_accept) { dialogInterface, which ->
                     handleOrderDelivered()
+                    dialogInterface.dismiss()
                 }
                     .setNegativeButton("Cancel", R.drawable.ic_close) { dialogInterface, which -> dialogInterface.dismiss() }
                     .build()
