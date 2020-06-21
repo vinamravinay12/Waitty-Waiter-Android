@@ -67,81 +67,82 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    } // Notification handle received from server
-    //    private void ShowNotificationServer(JSONObject OBJ) {
-    //
-    //        try{
-    //
-    //            long when = System.currentTimeMillis();
-    //
-    //            Intent intent =  new Intent(this, HomeActivity.class);
-    //            intent.putExtra(API.DATA,OBJ.toString());
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    //
-    //            PendingIntent pendingIntent=PendingIntent.getActivity(this,(int) when, intent, PendingIntent.FLAG_ONE_SHOT);;
-    //
-    //            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    //            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-    //                    .setContentTitle(getString(R.string.app_name))
-    //                    .setContentText(OBJ.getString(API.MESSAGE).trim())
-    //                    .setSound(defaultSoundUri)
-    //                    .setAutoCancel(true)
-    //                    .setStyle(new NotificationCompat.BigTextStyle().bigText(OBJ.getString(API.MESSAGE).trim()))
-    //                    .setContentIntent(pendingIntent);
-    //
-    //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-    //                notificationBuilder.setSmallIcon(R.drawable.notification_icon);
-    //                notificationBuilder.setColor(getResources().getColor(R.color.colorBlack));
-    //            }else
-    //                notificationBuilder.setSmallIcon(R.mipmap.launcher_icon);
-    //
-    //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    //                    notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL);
-    //                }
-    //
-    //            NotificationManager notificationManager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    //            notificationManager.notify((int) when, notificationBuilder.build());
-    //
-    //        }catch(Exception e){e.printStackTrace(); }
-    //    }
-    //
-    //    // Notification handle received from FCM
-    //    private void ShowNotificationFCM(String msg) {
-    //
-    //        try{
-    //
-    //            Intent intent = new Intent(this, SplashActivity.class);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    //
-    //            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-    //            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    //            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-    //                    .setContentTitle(getString(R.string.app_name))
-    //                    .setContentText(msg)
-    //                    .setAutoCancel(true)
-    //                    .setSound(defaultSoundUri)
-    //                    .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-    //                    .setContentIntent(pendingIntent);
-    //
-    //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-    //                notificationBuilder.setSmallIcon(R.drawable.notification_icon);
-    //                notificationBuilder.setColor(getResources().getColor(R.color.colorBlack));
-    //            }else
-    //                notificationBuilder.setSmallIcon(R.mipmap.launcher_icon);
-    //
-    //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    //                notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL);
-    //            }
-    //
-    //            NotificationManager notificationManager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    //            notificationManager.notify(0, notificationBuilder.build());
-    //
-    //        }catch(Exception e){e.printStackTrace(); }
-    //    }
+    }
+    // Notification handle received from server
+//        private void ShowNotificationServer(JSONObject OBJ) {
+//
+//            try{
+//
+//                long when = System.currentTimeMillis();
+//
+//                Intent intent =  new Intent(this, HomeActivity.class);
+//                intent.putExtra(API.DATA,OBJ.toString());
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                PendingIntent pendingIntent=PendingIntent.getActivity(this,(int) when, intent, PendingIntent.FLAG_ONE_SHOT);;
+//
+//                Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                        .setContentTitle(getString(R.string.app_name))
+//                        .setContentText(OBJ.getString(API.MESSAGE).trim())
+//                        .setSound(defaultSoundUri)
+//                        .setAutoCancel(true)
+//                        .setStyle(new NotificationCompat.BigTextStyle().bigText(OBJ.getString(API.MESSAGE).trim()))
+//                        .setContentIntent(pendingIntent);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    notificationBuilder.setSmallIcon(R.drawable.notification_icon);
+//                    notificationBuilder.setColor(getResources().getColor(R.color.colorBlack));
+//                }else
+//                    notificationBuilder.setSmallIcon(R.mipmap.launcher_icon);
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                        notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL);
+//                    }
+//
+//                NotificationManager notificationManager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                notificationManager.notify((int) when, notificationBuilder.build());
+//
+//            }catch(Exception e){e.printStackTrace(); }
+//        }
+//
+//        // Notification handle received from FCM
+//        private void ShowNotificationFCM(String msg) {
+//
+//            try{
+//
+//                Intent intent = new Intent(this, SplashActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+//                Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                        .setContentTitle(getString(R.string.app_name))
+//                        .setContentText(msg)
+//                        .setAutoCancel(true)
+//                        .setSound(defaultSoundUri)
+//                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
+//                        .setContentIntent(pendingIntent);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    notificationBuilder.setSmallIcon(R.drawable.notification_icon);
+//                    notificationBuilder.setColor(getResources().getColor(R.color.colorBlack));
+//                }else
+//                    notificationBuilder.setSmallIcon(R.mipmap.launcher_icon);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL);
+//                }
+//
+//                NotificationManager notificationManager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                notificationManager.notify(0, notificationBuilder.build());
+//
+//            }catch(Exception e){e.printStackTrace(); }
+//        }
 }
