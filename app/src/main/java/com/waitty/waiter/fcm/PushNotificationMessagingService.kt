@@ -74,11 +74,11 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
                         Utility.setSharedPreferencesInteger(this, constant.NOTIFICATION_COUNT_PROCESSING, notiCount)
                     }
 
-                      ShowNotificationServer(obj);
+                      showNotificationServer(obj);
                 }
                 Log.d("NOTI", "Notification server $obj")
             } else if (remoteMessage.notification != null) {
-                    ShowNotificationFCM(remoteMessage.notification?.body ?: "");
+                    showNotificationFCM(remoteMessage.notification?.body ?: "");
                 Log.d("NOTI", "Notification FCM " + remoteMessage.notification!!.body)
             }
         } catch (e: Exception) {
@@ -86,7 +86,7 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
         }
     }
     // Notification handle received from server
-    private fun ShowNotificationServer(OBJ: JSONObject) {
+    private fun showNotificationServer(OBJ: JSONObject) {
         try {
             val timeInMillis = System.currentTimeMillis()
             val intent = Intent(this, HomeActivity::class.java)
@@ -97,20 +97,19 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             val pendingIntent: PendingIntent = PendingIntent.getActivity(this, timeInMillis.toInt(), intent, PendingIntent.FLAG_ONE_SHOT)
             val defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(this)
+            val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(this,constant.PRIMARY_CHANNEL)
                     .setContentTitle(getString(R.string.app_name))
                     .setContentText(OBJ.getString(API.MESSAGE).trim())
                     .setSound(defaultSoundUri)
                     .setAutoCancel(true)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setStyle(NotificationCompat.BigTextStyle().bigText(OBJ.getString(API.MESSAGE).trim()))
                     .setContentIntent(pendingIntent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 notificationBuilder.setSmallIcon(R.drawable.notification_icon)
                 notificationBuilder.color = resources.getColor(R.color.colorBlack)
             } else notificationBuilder.setSmallIcon(R.mipmap.launcher_icon)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL)
-            }
+
             val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(timeInMillis.toInt(), notificationBuilder.build())
         } catch (e: Exception) {
@@ -120,7 +119,7 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
 
     //
     //    // Notification handle received from FCM
-    private fun ShowNotificationFCM(msg: String) {
+    private fun showNotificationFCM(msg: String) {
         try {
             val intent = Intent(this, SplashActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -129,20 +128,19 @@ class PushNotificationMessagingService : FirebaseMessagingService() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(this)
+            val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(this,constant.PRIMARY_CHANNEL)
                     .setContentTitle(getString(R.string.app_name))
                     .setContentText(msg)
                     .setAutoCancel(true)
                     .setSound(defaultSoundUri)
                     .setStyle(NotificationCompat.BigTextStyle().bigText(msg))
                     .setContentIntent(pendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 notificationBuilder.setSmallIcon(R.drawable.notification_icon)
                 notificationBuilder.setColor(getResources().getColor(R.color.colorBlack))
             } else notificationBuilder.setSmallIcon(R.mipmap.launcher_icon)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationBuilder.setChannelId(constant.PRIMARY_CHANNEL)
-            }
+
             val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(0, notificationBuilder.build())
         } catch (e: Exception) {

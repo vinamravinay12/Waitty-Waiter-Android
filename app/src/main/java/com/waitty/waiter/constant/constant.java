@@ -65,4 +65,5 @@ public class constant {
     public static final String TAG_SEARCH_ORDERS_DETAILS = "SearchOrderDetailsFragment";
 
     public static final String NOTIFICATION_SP = "NotificationSP";
+    public static final String NOTIFICATION_CHANNEL_GROUP_ID = "WaittyWaiterChannelGroup";
 }

@@ -1,6 +1,7 @@
 package com.waitty.waiter.utility;
 
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -28,21 +29,26 @@ public class NotificationHelper extends ContextWrapper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(constant.PRIMARY_CHANNEL, name, importance);
             channel.setDescription(description);
 
             channel.setSound( RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION), null);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+
+            createNotificationChannelGroup();
         }
     }
 
-    // Get notification manager
-    private NotificationManager getManager() {
-        if (manager == null) {
-            manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    private void createNotificationChannelGroup() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String groupId = constant.NOTIFICATION_CHANNEL_GROUP_ID;
+// The user-visible name of the group.
+            CharSequence groupName = getString(R.string.channel_group_name);
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(groupId, groupName));
         }
-        return manager;
     }
 }
