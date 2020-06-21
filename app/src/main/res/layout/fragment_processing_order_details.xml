@@ -59,7 +59,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/bwnistageo_light"
                         android:paddingEnd="@dimen/_5dp"
-                        android:text="@{orderDetailsVM.waiterDetails}"
+                        android:text="@{orderDetailsVM.userName}"
                         android:textColor="@color/colorWaiterIdText"
                         android:textSize="@dimen/_14sp"
                         app:layout_constraintStart_toStartOf="parent"

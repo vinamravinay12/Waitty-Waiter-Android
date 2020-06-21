@@ -150,6 +150,8 @@ public class Utility {
         nMgr.cancelAll();
 
         SharedPreferences prefs = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(context,constant.LOGIN_SP);
+        sharedPreferenceManager.clearAll();
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(context.getString(R.string.app_name));
         editor.clear();

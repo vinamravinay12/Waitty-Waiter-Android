@@ -68,6 +68,10 @@ class ServedOrdersListFragment : Fragment(),WKItemClickListener {
         return hashMapOf(BR.preparedOrdersVM to viewModel, BR.itemClickEvent to this)
     }
 
+    override fun onStart() {
+        super.onStart()
+        showNoInvite(viewModel?.getOrderListData()?.value?.size ?: 0 == 0)
+    }
 
 
     override fun onResume() {

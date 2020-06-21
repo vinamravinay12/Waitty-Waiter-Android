@@ -229,7 +229,33 @@ class NewOrderRepository(private val apiInterface: ApiInterface, private val tok
     }
 
 
+fun searchOrders(postData: JsonObject, responseData: MutableLiveData<WaittyAPIResponse>) : MutableLiveData<WaittyAPIResponse> {
+    var apiResponse = WaittyAPIResponse(null, APIStatus.LOADING, null, null)
 
+    apiInterface.searchOrder(postData, token).enqueue(object : Callback<OrderResponse> {
+
+        override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+            apiResponse = WaittyAPIResponse(null, APIStatus.ERROR, 404, t.localizedMessage)
+            responseData.value = apiResponse
+        }
+
+        override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
+            if (!response.isSuccessful) {
+
+                apiResponse = WaittyAPIResponse(null, APIStatus.ERROR, response.code(), "")
+
+                return
+            }
+
+            apiResponse = WaittyAPIResponse(response.body(), APIStatus.SUCCESS, null, null)
+            responseData.value = apiResponse
+
+        }
+    })
+
+    responseData.value = apiResponse
+    return responseData
+}
 
 
 }

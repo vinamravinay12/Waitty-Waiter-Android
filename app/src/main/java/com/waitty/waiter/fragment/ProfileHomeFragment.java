@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.translabtechnologies.visitormanagementsystem.vmshost.database.SharedPreferenceManager;
 import com.waitty.kitchen.fragment.FragmentUtils;
 import com.waitty.waiter.R;
+import com.waitty.waiter.activity.HomeActivity;
 import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.FragmentProfileHomeBinding;
 import com.waitty.waiter.model.LoginUser;
@@ -41,6 +42,10 @@ public class ProfileHomeFragment extends Fragment  {
         super.onResume();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        if(getActivity() instanceof HomeActivity) {
+            ((HomeActivity)getActivity()).setPageTitle(getString(R.string.txt_title_profile));
+        }
+
     }
 
     @Override
@@ -53,15 +58,19 @@ public class ProfileHomeFragment extends Fragment  {
         return root;
     }
 
+
+
     // Variable initialization
     private void init() {
         mclickHandler = new ClickHandler();
         bottomSheetBehavior = BottomSheetBehavior.from(fragmentProfileHomeBinding.profileHome);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setPeekHeight(500,true);
+        bottomSheetBehavior.setPeekHeight(300,true);
 
         fragmentProfileHomeBinding.btnLogout.setOnClickListener(v ->  mclickHandler.logoutClick(v));
+        fragmentProfileHomeBinding.cvPrivacyPolicy.setOnClickListener(v ->  mclickHandler.privacyPolicyClick(v));
+        fragmentProfileHomeBinding.cvTerms.setOnClickListener(v ->  mclickHandler.termsConditionsClick(v));
         fragmentProfileHomeBinding.setClickEvent(mclickHandler);
 
       bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -75,6 +84,9 @@ public class ProfileHomeFragment extends Fragment  {
           @Override
           public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
+                if(slideOffset <= 0.15f){
+                  closeProfileFragment();
+              }
           }
       });
         setUserData();
@@ -82,7 +94,8 @@ public class ProfileHomeFragment extends Fragment  {
 
     private void closeProfileFragment() {
         Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(constant.TAG_HOME);
-        FragmentUtils.INSTANCE.launchFragment(getActivity().getSupportFragmentManager(),R.id.nav_host_fragment,fragment,constant.TAG_HOME);
+
+        FragmentUtils.INSTANCE.launchFragment(getActivity().getSupportFragmentManager(),R.id.nav_host_fragment,fragment != null ? fragment : new HomeFragment(),constant.TAG_HOME);
     }
 
     // Set user information
@@ -130,7 +143,7 @@ public class ProfileHomeFragment extends Fragment  {
         }
 
         public void logoutClick(View view) {
-            Dialog.showLogoutDialog(mContext);
+            Dialog.showLogoutDialog(getActivity());
         }
 
     }

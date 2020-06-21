@@ -13,11 +13,23 @@
         <item name="material_dialog_positive_button_color">@color/colorBtnStartPreparingGreen</item>
         <item name="material_dialog_positive_button_text_color">@color/colorWhite</item>
         <item name="material_dialog_negative_button_text_color">@color/colorTabItemTextSelected</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ThemeOverlay.AppTheme.TextInputEditText.OutlinedBox" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorControlActivated">@color/colorTabItemTextSelected</item>
+
+    </style>
+
+    <style name="Widget.AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.TextInputEditText.OutlinedBox</item>
+    </style>
+
+
 
 
     <!--Loading progress bar style -->

@@ -24,6 +24,7 @@ import com.waitty.waiter.databinding.ActivityHomeBinding;
 import com.waitty.waiter.fragment.HomeFragment;
 import com.waitty.waiter.fragment.MenuFragment;
 import com.waitty.waiter.fragment.ProfileHomeFragment;
+import com.waitty.waiter.fragment.SearchOrdersListFragment;
 import com.waitty.waiter.fragment.SettingsFragment;
 import com.waitty.waiter.model.LoginUser;
 
@@ -60,8 +61,13 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         activityHomeBinding.ibBtnBack.setOnClickListener(v -> { handleBackButtonClick();});
+        activityHomeBinding.ibSearch.setOnClickListener(v -> { launchSearchFragment();});
 
         activityHomeBinding.navView.setOnNavigationItemSelectedListener(item -> launchSelectedFragment(item));
+    }
+
+    private void launchSearchFragment() {
+        FragmentUtils.INSTANCE.launchFragment(getSupportFragmentManager(),R.id.nav_host_fragment,new SearchOrdersListFragment(),constant.TAG_SEARCH);
     }
 
     @Override

@@ -29,7 +29,7 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginEnd="1dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.AppTheme.TextInputLayout"
                 android:hint="@string/txt_id"
                 app:boxStrokeColor="@color/colorWaiterIdText"
                 app:boxStrokeWidth="@dimen/_1dp"
@@ -51,13 +51,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtInputPasswordLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="290dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="72dp"
                 android:layout_marginEnd="1dp"
                 android:hint="@string/txt_password"
+                style="@style/Widget.AppTheme.TextInputLayout"
                 android:textColorHint="@color/colorTabItemTextSelected"
                 app:boxStrokeColor="@color/colorWaiterIdText"
                 app:boxStrokeWidth="@dimen/_1dp"

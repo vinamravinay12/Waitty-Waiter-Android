@@ -106,6 +106,14 @@ object BindingUtils {
         view.setBackgroundColor(ContextCompat.getColor(view.context,color))
     }
 
+    @BindingAdapter("textColor")
+    @JvmStatic fun setTextColor(view : View, color : Int){
+        if(view is TextView) {
+           ( view as? TextView)?.setTextColor(ContextCompat.getColor(view.context,color))
+        }
+
+    }
+
 
 
 }

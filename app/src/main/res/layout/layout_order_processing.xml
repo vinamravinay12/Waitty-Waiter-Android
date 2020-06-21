@@ -24,9 +24,9 @@
             android:layout_width="0dp"
             android:layout_height="210dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="@dimen/_5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="20dp"
             android:onClick="@{() -> itemClickEvent.onItemClick(position)}"
             app:cardCornerRadius="@dimen/_10dp"
             app:cardElevation="@dimen/_5dp"
@@ -63,7 +63,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/bwnistageo_light"
                     android:paddingEnd="@dimen/_5dp"
-                    android:text="@{processingOrdersVM.getWaiterDetails(position)}"
+                    android:text="@{processingOrdersVM.getUserName(position)}"
                     android:textColor="@color/colorWaiterIdText"
                     android:textSize="@dimen/_14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -136,10 +136,10 @@
 
                 <View
                     android:id="@+id/viewOrderStatusType"
+                    viewBackgroundColor="@{processingOrdersVM.getOrderStatusColor(position).intValue()}"
                     android:layout_width="48dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    viewBackgroundColor="@{processingOrdersVM.getOrderStatusColor(position).intValue()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view"
                     tools:background="@color/colorOrderStatusPreparing" />

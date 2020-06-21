@@ -53,7 +53,7 @@ public interface ApiInterface {
     Call<JsonElement> deliverOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.SEARCH_ORDER)
-    Call<JsonElement> searchOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
+    Call<OrderResponse> searchOrder(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);
 
     @POST(API.ORDER_STATUS)
     Call<OrderResponse> checkOrderStatus(@Body JsonObject OBJ,@Header(API.AUTHORIZATION) String token);

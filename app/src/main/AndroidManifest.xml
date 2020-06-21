@@ -22,6 +22,11 @@
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -29,11 +34,7 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.HomeActivity"
@@ -55,7 +56,7 @@
             android:name=".activity.ServedOrderDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" /> <!-- Push notification service -->
-        <service android:name=".fcm.PushNotificationMessagingService" >
+        <service android:name=".fcm.PushNotificationMessagingService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
