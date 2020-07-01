@@ -11,9 +11,11 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.translabtechnologies.visitormanagementsystem.vmshost.database.SharedPreferenceManager;
 import com.waitty.kitchen.fragment.FragmentUtils;
@@ -21,10 +23,14 @@ import com.waitty.waiter.R;
 import com.waitty.waiter.activity.HomeActivity;
 import com.waitty.waiter.constant.constant;
 import com.waitty.waiter.databinding.FragmentProfileHomeBinding;
+import com.waitty.waiter.model.APIStatus;
 import com.waitty.waiter.model.LoginUser;
+import com.waitty.waiter.model.WaittyAPIResponse;
 import com.waitty.waiter.retrofit.API;
+import com.waitty.waiter.retrofit.ApiClient;
 import com.waitty.waiter.utility.Dialog;
 import com.waitty.waiter.utility.Utility;
+import com.waitty.waiter.viewmodel.repository.NotificationsRepository;
 
 import java.lang.reflect.Type;
 
@@ -68,6 +74,7 @@ public class ProfileHomeFragment extends Fragment  {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         bottomSheetBehavior.setPeekHeight(300,true);
 
+
         fragmentProfileHomeBinding.btnLogout.setOnClickListener(v ->  mclickHandler.logoutClick(v));
         fragmentProfileHomeBinding.cvPrivacyPolicy.setOnClickListener(v ->  mclickHandler.privacyPolicyClick(v));
         fragmentProfileHomeBinding.cvTerms.setOnClickListener(v ->  mclickHandler.termsConditionsClick(v));
@@ -106,7 +113,7 @@ public class ProfileHomeFragment extends Fragment  {
         fragmentProfileHomeBinding.txtName.setText(userInformation.getName());
         fragmentProfileHomeBinding.txtWaiterID.setText(getString(R.string.text_waiterid)+" "+userInformation.getKey());
 
-        fragmentProfileHomeBinding.switchNotifications.setChecked(Utility.getSharedPreferencesBoolean(mContext, constant.NOTIFICATIONS_SHOW));
+        fragmentProfileHomeBinding.switchNotifications.setChecked(new SharedPreferenceManager(getContext(),constant.NOTIFICATION_SP).getBooleanPreference(constant.NOTIFICATIONS_SHOW,false));
 
         //switch change for notification
         fragmentProfileHomeBinding.switchNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -153,17 +160,22 @@ public class ProfileHomeFragment extends Fragment  {
     // Change notifications settings API
     private void changeNotificationsSettingsAPI(boolean isChecked) {
 
-//        try{
-//            JsonObject jsonObject=new JsonObject();
-//            jsonObject.addProperty(API.NOTIFICATION_TOGGLE, isChecked);
-//
-//            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//            Call<JsonElement> call = apiInterface.profileUpdate(jsonObject,Utility.getSharedPreferencesString(mContext,constant.USER_SECURITY_TOKEN));
-//            new APICall(mContext).Server_Interaction(call,this ,API.UPDATE_PROFILE);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        NotificationsRepository notificationsRepository = new NotificationsRepository(ApiClient.getAPIInterface());
+        JsonObject jsonObject=new JsonObject();
+            jsonObject.addProperty(API.NOTIFICATION_TOGGLE, isChecked);
+        notificationsRepository.changeNotificationSettings(Utility.getToken(getContext()),jsonObject).observe(getViewLifecycleOwner(), new Observer<WaittyAPIResponse>() {
+            @Override
+            public void onChanged(WaittyAPIResponse waittyAPIResponse) {
+                if(waittyAPIResponse.getStatus() == APIStatus.SUCCESS) {
+                    new SharedPreferenceManager(getContext(),constant.NOTIFICATION_SP).storeBooleanPreference(constant.NOTIFICATIONS_SHOW,isChecked);
+                }
+
+                else if(waittyAPIResponse.getStatus() == APIStatus.ERROR) {
+                    new SharedPreferenceManager(getContext(),constant.NOTIFICATION_SP).storeBooleanPreference(constant.NOTIFICATIONS_SHOW,false);
+                }
+            }
+        });
+
     }
 
 

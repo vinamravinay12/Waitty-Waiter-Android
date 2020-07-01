@@ -66,4 +66,5 @@ public class constant {
 
     public static final String NOTIFICATION_SP = "NotificationSP";
     public static final String NOTIFICATION_CHANNEL_GROUP_ID = "WaittyWaiterChannelGroup";
+    public static final String SWW = "Something Went Wrong";
 }
